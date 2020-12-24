@@ -25,13 +25,21 @@
 var NAVTREE =
 [
   [ "EX4", "index.html", [
-    [ "Ex-4: Communication", "index.html#autotoc_md0", [
-      [ "Implemntation Plan", "index.html#autotoc_md1", null ],
-      [ "How to start?", "index.html#autotoc_md2", [
-        [ "1. Porject Hierarchy", "index.html#autotoc_md3", null ],
-        [ "2. Coding Priciples", "index.html#autotoc_md4", null ],
-        [ "3. Debug Levels", "index.html#autotoc_md5", null ]
+    [ "Ex-4: Communication", "md___users_matanlevy_learning_operating_systems_hw4_readme.html", [
+      [ "Implemntation Plan", "md___users_matanlevy_learning_operating_systems_hw4_readme.html#autotoc_md1", null ],
+      [ "How to start?", "md___users_matanlevy_learning_operating_systems_hw4_readme.html#autotoc_md2", [
+        [ "1. Porject Hierarchy", "md___users_matanlevy_learning_operating_systems_hw4_readme.html#autotoc_md3", null ],
+        [ "2. Coding Priciples", "md___users_matanlevy_learning_operating_systems_hw4_readme.html#autotoc_md4", null ],
+        [ "3. Debug Levels", "md___users_matanlevy_learning_operating_systems_hw4_readme.html#autotoc_md5", null ]
       ] ]
+    ] ],
+    [ "Ex-4: Server", "md___users_matanlevy_learning_operating_systems_hw4_server.html", [
+      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md7", null ],
+      [ "Inter thread communication", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md8", null ]
+    ] ],
+    [ "Ex-4: Client", "md___users_matanlevy_learning_operating_systems_hw4_client.html", [
+      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md10", null ],
+      [ "Pitfalls and notes", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md11", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],

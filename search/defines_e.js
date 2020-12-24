@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_5f_5fconsole_5fcolor_5fcode_316',['YELLOW__CONSOLE_COLOR_CODE',['../trace_8h.html#a292846ac16d6ae50158612cc56ed8654',1,'trace.h']]]
+  ['yellow_5f_5fconsole_5fcolor_5fcode_322',['YELLOW__CONSOLE_COLOR_CODE',['../trace_8h.html#a292846ac16d6ae50158612cc56ed8654',1,'trace.h']]]
 ];
