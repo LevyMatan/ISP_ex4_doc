@@ -98,40 +98,583 @@ $(document).ready(function(){initNavTree('client_8c_source.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <a href="client_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*----------------------------------------------------------------</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">INCLUDES</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/* PRIVATE INCLUDES                                               */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="client_8h.html">client.h</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*----------------------------------------------------------------</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">EXTERNAL FUNCTIONS</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/* EXTERNAL FUNCTIONS                                             */</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">   28</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="structclient__command__line__parms__s.html">client_command_line_parms_t</a> command_line_params;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    SOCKADDR_IN clientService = {0};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    WSADATA wsaData; <span class="comment">//Create a WSADATA object called wsaData.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//The WSADATA structure contains information about the Windows Sockets implementation.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    SOCKET m_socket = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//HANDLE hThread[2];</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="structmsg__parameters__s.html">msg_parameters_t</a> received_msg_params = {0};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">char</span>* out_msg_parameters[<a class="code" href="read__write__msg__ext_8h.html#a678e3f58c1f09ca9cb330525943c5fcf">MAX_NUMBER_OF_PARAMETERS_IN_MSG</a>] = { 0 };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="common__types_8h.html#a5e418008ba4e83cd8962d83607bedcec">set_output_msg_parameters_to_null</a>(); </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        e_status = <a class="code" href="loglog_8txt.html#ac998e6f9e7f612515f8d3e8fb89fe383">parse_command_line_input</a>(argc, argv, &amp;command_line_params);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="comment">// Initialize Winsock.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">//Call WSAStartup and check for errors.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">int</span> iResult = WSAStartup(MAKEWORD(2, 2), &amp;wsaData);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span> (iResult != <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;WSAStartup() FAILED!\n&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a76f6f5574dcd93440568a98f40bebc58">ERROR_FAILED_TO_STARTUP_WSA_E</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//Call the socket function and return its value to the m_socket variable. </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// For this application, use the Internet address family, streaming sockets, and the TCP/IP protocol.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">while</span>(TRUE)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="comment">// Create a socket.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="comment">// Check for errors to ensure that the socket is a valid socket.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">if</span> (m_socket == INVALID_SOCKET) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;Error at socket(): %ld\n&quot;</span>, WSAGetLastError());</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a4a22d74f2b4be87692a41179115fe0c7">ERROR_FAILED_CREATING_A_SOCKET_E</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="comment">// Connect to a server.</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="comment">//Create a sockaddr_in object clientService and set  values.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            clientService.sin_family = AF_INET;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            InetPton(AF_INET, <a class="code" href="common__types_8h.html#aa14f68373e35f1e67f787f92fc0b778a">SERVER_ADDRESS_STR_WIDE</a>, &amp;clientService.sin_addr.s_addr);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            clientService.sin_port = htons((u_short)command_line_params.<a class="code" href="structclient__command__line__parms__s.html#a76c0878d8299b3049b39a84f5179c926">port_num</a>); <span class="comment">//Setting the port to connect to.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="comment">// Socket connection with SERVER using connect() winapi. Poll on user input when failed to connect.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">while</span> (TRUE)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keywordtype">int</span> connect_status = SOCKET_ERROR;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <a class="code" href="trace_8h.html#a4184b28a8f43f65b009e1e7f20ae612c">SET_CONSOLE_COLOR</a>(<a class="code" href="trace_8h.html#abdfe92928f6ac993311c579d9ebad25e">GREEN__CONSOLE_COLOR_CODE</a>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                connect_status = connect(m_socket, (SOCKADDR*)&amp;clientService, <span class="keyword">sizeof</span>(clientService));</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordflow">if</span>(connect_status == SOCKET_ERROR)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    printf(<span class="stringliteral">&quot;Failed connecting to server on %s:%s\n&quot;</span>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1">ip_string</a>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#aa394c7d6979af651350506f5a5e32d24">port_string</a>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <a class="code" href="trace_8h.html#a88edd2aa4feabff4af21a997d5d8aa23">DEBUG_PRINT</a>(<a class="code" href="trace_8h.html#aff81c997c9611c2854fd1a9d5bba0c3f">DEBUG_LEVEL_THREE</a>, <span class="stringliteral">&quot;FAILED with WSA error %d\n&quot;</span>, WSAGetLastError());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keywordtype">int</span> user_choise = <a class="code" href="client_8c.html#a8fa505845830a310b128a7e2d8fc351f">client_options_when_failed_to_connect</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="keywordflow">if</span>(1 == user_choise)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        <span class="comment">// try to reconnect again</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (2 == user_choise)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                        <span class="comment">// TODO: real flow</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        printf(<span class="stringliteral">&quot;Need to exit program\n&quot;</span>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232ab9bed49ba5fd871b801ba0a10a082806">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_FAILED_CONNECTION_E</a>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;FATAL ERROR! The program should never reach this point!\n&quot;</span>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    printf(<span class="stringliteral">&quot;Connected to server on %s:%s\n&quot;</span>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1">ip_string</a>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#aa394c7d6979af651350506f5a5e32d24">port_string</a>);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="trace_8h.html#a36553cf06fe235317ed52ed04c9371ab">SET_CONSOLE_WHITE</a>();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="comment">// Establish connection: send client request and wait for approve</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordtype">char</span> client_request_buffer[<a class="code" href="read__write__msg__ext_8h.html#a17e333794ae761cd55ec6fd6fc0f1bac">MAX_MSG_SIZE</a>] = { <span class="charliteral">&#39;\0&#39;</span> };</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            out_msg_parameters[0] = (<span class="keywordtype">char</span>*)command_line_params.<a class="code" href="structclient__command__line__parms__s.html#a2af36ae238b91269fefac33f1ace686a">username_string</a>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            e_status = <a class="code" href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a8c0f1bb4e3d021ef6b5a189c32b67b4f">CLIENT_REQUEST</a>, out_msg_parameters, m_socket);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            e_status = <a class="code" href="send__recv__messages__ext_8h.html#a11fe50688f0df18c280049634dc96de2">receive_msg</a>(m_socket, &amp;received_msg_params);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span>(received_msg_params.<a class="code" href="structmsg__parameters__s.html#adb4054659e7090fc1be50b26c969ba1d">e_msg_type</a> == <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adfd1faa5f76c73bc546403e79b2c5f24">SERVER_APPROVED</a>)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    e_status = <a class="code" href="send__recv__messages__ext_8h.html#a11fe50688f0df18c280049634dc96de2">receive_msg</a>(m_socket, &amp;received_msg_params);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    e_status = <a class="code" href="client_8c.html#ae048b19573a9feee41ce56523d74e98d">act_to_msg</a>(&amp;m_socket, received_msg_params);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                } <span class="keywordflow">while</span> (TRUE);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span>(received_msg_params.<a class="code" href="structmsg__parameters__s.html#adb4054659e7090fc1be50b26c969ba1d">e_msg_type</a> == <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a668a6ad3d1e8198812413c80da3e44fd">SERVER_DENIED</a>)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                printf(<span class="stringliteral">&quot;Server on %s:%s denied the connection request.\n&quot;</span>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1">ip_string</a>, command_line_params.<a class="code" href="structclient__command__line__parms__s.html#aa394c7d6979af651350506f5a5e32d24">port_string</a>);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                printf(<span class="stringliteral">&quot;Reason for server denied is: %s.\n&quot;</span>, received_msg_params.<a class="code" href="structmsg__parameters__s.html#ac285d9b4b9f40809d6f43c9758a27b22">server_denied_reason</a>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                e_status = <a class="code" href="send__recv__messages__ext_8h.html#adc14a18b394d7e5f75e628ccf3e5feeb">wait_for_socket_shutdown</a>(m_socket);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <span class="keywordtype">int</span> user_choice = <a class="code" href="client_8c.html#a8fa505845830a310b128a7e2d8fc351f">client_options_when_failed_to_connect</a>();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">if</span>(user_choice == <a class="code" href="client_8h.html#a22a4665115d3ecea1d9b342307db0c76">FAIL_MENU_RETRY</a>)</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                    <span class="comment">// Do nothing (stay in loop)</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (user_choice == <a class="code" href="client_8h.html#af75be8107911ddf46c7db5b10f3889b5">FAIL_MENU_QUIT</a>) <span class="comment">// Quit </span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                    e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a5756b4548359082e48031f555f4f002e">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_SERVER_DENIED_E</a>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                    <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;FATAL ERROR!!! Program reached an invalid flow!\n&quot;</span>);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232abe1fccf9568d1409c0d345d822681d59">ERROR_FATAL_ERROR_E</a>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;FATAL ERROR!!! Program reached an invalid flow!\n&quot;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232abe1fccf9568d1409c0d345d822681d59">ERROR_FATAL_ERROR_E</a>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="comment">// Decide to stay or break </span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keywordflow">if</span>( e_status == <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a0f00e66b28da4b30e49aefdcc729b8b9">ERROR_USER_CHOSE_TO_QUIT_GAME_IN_MAIN_MENU_E</a>            ||</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                e_status == <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232ab9bed49ba5fd871b801ba0a10a082806">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_FAILED_CONNECTION_E</a> ||</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                e_status == <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a5756b4548359082e48031f555f4f002e">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_SERVER_DENIED_E</a>        )</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        } <span class="comment">//end of main loop</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    } <span class="keywordflow">while</span> (FALSE);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (m_socket)</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        closesocket(m_socket);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    WSACleanup();</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">return</span> e_status;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;}</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="client_8c.html#ae048b19573a9feee41ce56523d74e98d">  201</a></span>&#160;<span class="keyword">static</span> <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> <a class="code" href="client_8c.html#ae048b19573a9feee41ce56523d74e98d">act_to_msg</a>(SOCKET *p_socket, <a class="code" href="structmsg__parameters__s.html">msg_parameters_t</a> input_msg_params)</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    SOCKET connection_socket = {0};</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">char</span>* out_msg_parameters[<a class="code" href="read__write__msg__ext_8h.html#a678e3f58c1f09ca9cb330525943c5fcf">MAX_NUMBER_OF_PARAMETERS_IN_MSG</a>] = { 0 };</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <a class="code" href="common__types_8h.html#a5e418008ba4e83cd8962d83607bedcec">set_output_msg_parameters_to_null</a>(); </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordtype">int</span> user_choice = -1;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="comment">/* Input Check*/</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">if</span>(NULL == p_socket)</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        {</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;Null pointer for socket!\n&quot;</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a0dc97f69265018e55f133283c5f93858">ERROR_NULL_POINTER_E</a>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            connection_socket = (*p_socket);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">switch</span> (input_msg_params.<a class="code" href="structmsg__parameters__s.html#adb4054659e7090fc1be50b26c969ba1d">e_msg_type</a>)</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adc159dce65383e1b7c3ef410733f6f94">SERVER_MAIN_MENU</a>:</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <a class="code" href="trace_8h.html#a88edd2aa4feabff4af21a997d5d8aa23">DEBUG_PRINT</a>(<a class="code" href="trace_8h.html#a6c45057238d860cdc3693e9802b95ad6">DEBUG_LEVEL_TWO</a>, <span class="stringliteral">&quot;CLIENT is acting to %s msg ==\n&quot;</span>, <a class="code" href="read__write__msg__ext_8h.html#ab1b6ca1d07f8dedd4d8a2511197bc785">get_msg_string</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adc159dce65383e1b7c3ef410733f6f94">SERVER_MAIN_MENU</a>));</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            user_choice = <a class="code" href="client_8c.html#ac8c1cdb7241c10555ae16c55d35a48df">client_main_menu</a>();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keywordflow">if</span>(user_choice == <a class="code" href="client_8h.html#a954ce12b5329a3d27c78972e9c147018">MAIN_MENU_PLAY_VERSUS</a>)</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                e_status = <a class="code" href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7ae812112d4ec24712ea5802197c27db4f">CLIENT_VERSUS</a>, out_msg_parameters, connection_socket);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            }</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (user_choice == <a class="code" href="client_8h.html#a1098712ddf4ee1701ea37770928ea8c8">MAIN_MENU_QUIT</a>) <span class="comment">// Quit </span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <span class="comment">// Send Client disconnect </span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                e_status = <a class="code" href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7aa400fe832dc5193688c9a5e61c0e48ed">CLIENT_DISCONNECT</a>, out_msg_parameters, connection_socket);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                e_status = <a class="code" href="send__recv__messages__ext_8h.html#adc14a18b394d7e5f75e628ccf3e5feeb">wait_for_socket_shutdown</a>(connection_socket);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <span class="comment">// Graceful shutdown</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a0f00e66b28da4b30e49aefdcc729b8b9">ERROR_USER_CHOSE_TO_QUIT_GAME_IN_MAIN_MENU_E</a>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;FATAL ERROR!!! Program reached an invalid flow!\n&quot;</span>);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232abe1fccf9568d1409c0d345d822681d59">ERROR_FATAL_ERROR_E</a>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5f1c24869f829838b2a0c3407fa3e7d2">SERVER_INVITE</a>:</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            printf(<span class="stringliteral">&quot;Game is on!\n&quot;</span>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7afa119b289f464888945daab2c7b5bf0c">SERVER_SETUP_REQUEST</a>:</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            printf(<span class="stringliteral">&quot;Choose your 4 digits:\n&quot;</span>);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordtype">char</span> user_number[5] = {0};</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            e_status = <a class="code" href="client_8c.html#aca2188e9c9465c55f0b09ff5979a17f3">get_four_unique_digits_from_user</a>(user_number);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            out_msg_parameters[0] = user_number;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            e_status = <a class="code" href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a4930493be73372e686964ad679b3a8e8">CLIENT_SETUP</a>, out_msg_parameters, connection_socket);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a22ea340157fa027437cc0a38351c648b">SERVER_PLAYER_MOVE_REQUEST</a>:</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            printf(<span class="stringliteral">&quot;Choose your guess:\n&quot;</span>);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordtype">char</span> user_guess[5] = {0};</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            e_status = <a class="code" href="client_8c.html#a7c288a5e6f6997e3b65899d3f60bb3bf">get_four_digits_from_user</a>(user_guess);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            out_msg_parameters[0] = user_guess;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            e_status = <a class="code" href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a>(<a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a450888cabcc3550905acf612357808c8">CLIENT_PLAYER_MOVE</a>, out_msg_parameters, connection_socket);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7acebd6c9392c1d94385fc6db4f23f61ba">SERVER_GAME_RESULTS</a>:</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <a class="code" href="client_8c.html#a33954be5114778ebfdebf05166db1d66">print_game_result</a>(input_msg_params);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a85ecd40fa911814ae85ce7aaa47bb1ae">SERVER_WIN</a>:</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            printf(<span class="stringliteral">&quot;%s won!\n&quot;</span>, input_msg_params.<a class="code" href="structmsg__parameters__s.html#a348090d05a8f79a7fcbd04b35bdfd5b0">username</a>);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            printf(<span class="stringliteral">&quot;opponents number was %s\n&quot;</span>, input_msg_params.<a class="code" href="structmsg__parameters__s.html#a07da6fcacceeb7e6bedd59d1e9964870">four_digits_number</a>);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5308d98e7314622fea6767d01c00a0b9">SERVER_DRAW</a>:</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            printf(<span class="stringliteral">&quot;It&#39;s a tie\n&quot;</span>);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a6dea92e983397202ddfd1465d7e2d527">SERVER_NO_OPPONENTS</a>:</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            printf(<span class="stringliteral">&quot;No Opponents :(\n&quot;</span>);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a919a9825c877603dfaecae0dce5bfba2">SERVER_OPPONENT_QUIT</a>:</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="comment">// Check if we got here legally</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            printf(<span class="stringliteral">&quot;Opponent quit.\n&quot;</span>);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;FATAL ERROR! Program should not reach this point\n&quot;</span>);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a>(e_status);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    } <span class="keywordflow">while</span> (FALSE);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">return</span> e_status;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;}</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">/*-------------------Menu related function------------------------*/</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="client_8c.html#af37e90d89a9958c256bbacae100b5d4c">  329</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="client_8c.html#af37e90d89a9958c256bbacae100b5d4c">get_user_menu_input</a>()</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <a class="code" href="trace_8h.html#a4184b28a8f43f65b009e1e7f20ae612c">SET_CONSOLE_COLOR</a>(<a class="code" href="trace_8h.html#ab57461fba1d7143b5d2e09c5dd277e6b">MAGENTA__CONSOLE_COLOR_CODE</a>);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">int</span> user_choice;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">int</span> invalid_input = FALSE;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="keywordtype">char</span> line[<a class="code" href="read__write__msg__ext_8h.html#a31f36c9ebfcc3d6687982ec6a1c5a7b6">MAX_ERROR_STRING_LENGTH</a>];</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordflow">if</span> (fgets(line, <span class="keyword">sizeof</span>(line), stdin)) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            <span class="keywordflow">if</span> (1 == sscanf_s(line, <span class="stringliteral">&quot;%d&quot;</span>, &amp;user_choice)) </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                <span class="keywordflow">if</span>((user_choice == 1) || (user_choice == 2))</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                }</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        printf(<span class="stringliteral">&quot;Invalid input! Please enter 1 or 2\n&quot;</span>);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    } <span class="keywordflow">while</span> (TRUE);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <a class="code" href="trace_8h.html#a36553cf06fe235317ed52ed04c9371ab">SET_CONSOLE_WHITE</a>();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordflow">return</span> user_choice;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;}</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="client_8c.html#aca2188e9c9465c55f0b09ff5979a17f3">  361</a></span>&#160;<span class="keyword">static</span> <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> <a class="code" href="client_8c.html#aca2188e9c9465c55f0b09ff5979a17f3">get_four_unique_digits_from_user</a>(<span class="keywordtype">char</span> user_4_digits[<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;{</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordtype">char</span> line[256];</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordflow">if</span> (fgets(line, <span class="keyword">sizeof</span>(line), stdin)) {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <span class="keywordflow">if</span> (1 == sscanf_s(line, <span class="stringliteral">&quot;%4c&quot;</span>, user_4_digits, <a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>))</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            {</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                <span class="keywordflow">if</span>(<a class="code" href="client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4">is_unique_digits</a>(user_4_digits) == TRUE)</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        }</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        printf(<span class="stringliteral">&quot;Invalid input! Please 4 DIFFERENT numbers\n&quot;</span>);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    } <span class="keywordflow">while</span> (TRUE);    </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">return</span> e_status;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;}</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno"><a class="line" href="client_8c.html#a7c288a5e6f6997e3b65899d3f60bb3bf">  390</a></span>&#160;<span class="keyword">static</span> <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> <a class="code" href="client_8c.html#a7c288a5e6f6997e3b65899d3f60bb3bf">get_four_digits_from_user</a>(<span class="keywordtype">char</span> user_4_digits[<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;{</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> e_status = <a class="code" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a>;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    {</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keywordtype">char</span> line[256];</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">if</span> (fgets(line, <span class="keyword">sizeof</span>(line), stdin)) {</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            <span class="keywordflow">if</span> (1 == sscanf_s(line, <span class="stringliteral">&quot;%4c&quot;</span>, user_4_digits, <a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>))</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;                <span class="keywordflow">if</span>(<a class="code" href="client_8c.html#aadea52a49157a5db6287b7007d70e224">is_four_digits</a>(user_4_digits) == TRUE)</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                }</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            }</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        printf(<span class="stringliteral">&quot;Invalid input! Please 4 DIFFERENT numbers\n&quot;</span>);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    } <span class="keywordflow">while</span> (TRUE);    </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">return</span> e_status;</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;}</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
+<div class="line"><a name="l00419"></a><span class="lineno"><a class="line" href="client_8c.html#aadea52a49157a5db6287b7007d70e224">  419</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="client_8c.html#aadea52a49157a5db6287b7007d70e224">is_four_digits</a>(<span class="keywordtype">char</span> digits_array[<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;{</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordflow">if</span>(NULL == digits_array)</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    {</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;Received NULL pointer!!!\n&quot;</span>);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    }</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    {</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> idx = 0; idx &lt; <a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>; idx++)</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            <span class="keywordflow">if</span> (isdigit(digits_array[idx]) == 0) <span class="comment">// Not a digit</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            {</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                printf(<span class="stringliteral">&quot;All characters must be digits!\n&quot;</span>);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                <span class="keywordflow">return</span> FALSE;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            }</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    }</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;}</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno"><a class="line" href="client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4">  447</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4">is_unique_digits</a>(<span class="keywordtype">char</span> digits_array[<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;{</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keywordflow">if</span>(NULL == digits_array)</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    {</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        <a class="code" href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a>(<span class="stringliteral">&quot;Received NULL pointer!!!\n&quot;</span>);</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    }</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    {</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> idx = 0; idx &lt; <a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>; idx++)</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        {</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;            <span class="keywordflow">if</span> (isdigit(digits_array[idx]) == 0) <span class="comment">// Not a digit</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;            {</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;                printf(<span class="stringliteral">&quot;All characters must be digits!\n&quot;</span>);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                <span class="keywordflow">return</span> FALSE;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;            }</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;            {</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                <span class="keywordflow">if</span>(digits_array[idx] == digits_array[(idx + 1)%<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>] || </div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                   digits_array[idx] == digits_array[(idx + 2)%<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>] || </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                   digits_array[idx] == digits_array[(idx + 3)%<a class="code" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>]   )</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                {</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                    printf(<span class="stringliteral">&quot;Your input has repetetive digits\n&quot;</span>);</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;                    <span class="keywordflow">return</span> FALSE;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                }</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;            }</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;            </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;            </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;        }</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    }</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    </div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;}</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno"><a class="line" href="client_8c.html#a33954be5114778ebfdebf05166db1d66">  487</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="client_8c.html#a33954be5114778ebfdebf05166db1d66">print_game_result</a>(<span class="keyword">const</span> <a class="code" href="structmsg__parameters__s.html">msg_parameters_t</a> game_results_params)</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;{</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    printf(<span class="stringliteral">&quot;Bulls: %d\n&quot;</span>, game_results_params.<a class="code" href="structmsg__parameters__s.html#a42584da163d2d62e9ad3b02b25dcb3d0">num_of_bulls</a>);</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    printf(<span class="stringliteral">&quot;Cows: %d\n&quot;</span>, game_results_params.<a class="code" href="structmsg__parameters__s.html#a27c28957aecebfb15e0b0fe54ff9f7eb">num_of_cows</a>);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    printf(<span class="stringliteral">&quot;%s played: %s\n&quot;</span>, game_results_params.<a class="code" href="structmsg__parameters__s.html#a348090d05a8f79a7fcbd04b35bdfd5b0">username</a>, game_results_params.<a class="code" href="structmsg__parameters__s.html#a07da6fcacceeb7e6bedd59d1e9964870">four_digits_number</a>);</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;}</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
+<div class="line"><a name="l00500"></a><span class="lineno"><a class="line" href="client_8c.html#a8fa505845830a310b128a7e2d8fc351f">  500</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="client_8c.html#a8fa505845830a310b128a7e2d8fc351f">client_options_when_failed_to_connect</a>()</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;{</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    <a class="code" href="trace_8h.html#a4184b28a8f43f65b009e1e7f20ae612c">SET_CONSOLE_COLOR</a>(<a class="code" href="trace_8h.html#a292846ac16d6ae50158612cc56ed8654">YELLOW__CONSOLE_COLOR_CODE</a>);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;    printf(<span class="stringliteral">&quot;Choose what to do next:\n&quot;</span>);</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;    printf(<span class="stringliteral">&quot;1. Try to reconnect\n&quot;</span>);</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;    printf(<span class="stringliteral">&quot;2. Exit\n&quot;</span>);</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160; </div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    <span class="keywordtype">int</span> user_choice = <a class="code" href="client_8c.html#af37e90d89a9958c256bbacae100b5d4c">get_user_menu_input</a>();</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160; </div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    <a class="code" href="trace_8h.html#a36553cf06fe235317ed52ed04c9371ab">SET_CONSOLE_WHITE</a>();</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160; </div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    <span class="keywordflow">return</span> user_choice;</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;}</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
+<div class="line"><a name="l00521"></a><span class="lineno"><a class="line" href="client_8c.html#ac8c1cdb7241c10555ae16c55d35a48df">  521</a></span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="client_8c.html#ac8c1cdb7241c10555ae16c55d35a48df">client_main_menu</a>()</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;{</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    <span class="comment">// Debug Prefix /////////////</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;    <a class="code" href="trace_8h.html#a4184b28a8f43f65b009e1e7f20ae612c">SET_CONSOLE_COLOR</a>(<a class="code" href="trace_8h.html#abdfe92928f6ac993311c579d9ebad25e">GREEN__CONSOLE_COLOR_CODE</a>);</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    <a class="code" href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a>();</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    </div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    printf(<span class="stringliteral">&quot;Choose what to do next:\n&quot;</span>);</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    printf(<span class="stringliteral">&quot;1. Play against another client\n&quot;</span>);</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    printf(<span class="stringliteral">&quot;2. Quit\n&quot;</span>);</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160; </div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <span class="keywordtype">int</span> user_choice = <a class="code" href="client_8c.html#af37e90d89a9958c256bbacae100b5d4c">get_user_menu_input</a>();</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    <span class="comment">// Debug Suffix /////////////</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    <a class="code" href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a>();</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    <a class="code" href="trace_8h.html#a36553cf06fe235317ed52ed04c9371ab">SET_CONSOLE_WHITE</a>();</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    <span class="keywordflow">return</span> user_choice;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="atrace_8h_html_ad4ed3d5d742c56a417076ab5e1a5dd29"><div class="ttname"><a href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a></div><div class="ttdeci">#define DEBUG_PRINT_FUNCTION_START()</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00154">trace.h:154</a></div></div>
+<div class="ttc" id="atrace_8h_html_ab57461fba1d7143b5d2e09c5dd277e6b"><div class="ttname"><a href="trace_8h.html#ab57461fba1d7143b5d2e09c5dd277e6b">MAGENTA__CONSOLE_COLOR_CODE</a></div><div class="ttdeci">#define MAGENTA__CONSOLE_COLOR_CODE</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00035">trace.h:35</a></div></div>
+<div class="ttc" id="atrace_8h_html_abdfe92928f6ac993311c579d9ebad25e"><div class="ttname"><a href="trace_8h.html#abdfe92928f6ac993311c579d9ebad25e">GREEN__CONSOLE_COLOR_CODE</a></div><div class="ttdeci">#define GREEN__CONSOLE_COLOR_CODE</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00033">trace.h:33</a></div></div>
+<div class="ttc" id="aclient_8h_html_a22a4665115d3ecea1d9b342307db0c76"><div class="ttname"><a href="client_8h.html#a22a4665115d3ecea1d9b342307db0c76">FAIL_MENU_RETRY</a></div><div class="ttdeci">#define FAIL_MENU_RETRY</div><div class="ttdef"><b>Definition:</b> <a href="client_8h_source.html#l00037">client.h:37</a></div></div>
+<div class="ttc" id="astructclient__command__line__parms__s_html_a76c0878d8299b3049b39a84f5179c926"><div class="ttname"><a href="structclient__command__line__parms__s.html#a76c0878d8299b3049b39a84f5179c926">client_command_line_parms_s::port_num</a></div><div class="ttdeci">DWORD port_num</div><div class="ttdef"><b>Definition:</b> <a href="client_2command__line__parsing_8h_source.html#l00049">client/command_line_parsing.h:49</a></div></div>
+<div class="ttc" id="aclient_8c_html_a7c288a5e6f6997e3b65899d3f60bb3bf"><div class="ttname"><a href="client_8c.html#a7c288a5e6f6997e3b65899d3f60bb3bf">get_four_digits_from_user</a></div><div class="ttdeci">static error_e get_four_digits_from_user(char user_4_digits[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS])</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00390">client.c:390</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232a0dc97f69265018e55f133283c5f93858"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a0dc97f69265018e55f133283c5f93858">ERROR_NULL_POINTER_E</a></div><div class="ttdeci">@ ERROR_NULL_POINTER_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00077">common_types.h:77</a></div></div>
+<div class="ttc" id="aclient_8c_html_ae048b19573a9feee41ce56523d74e98d"><div class="ttname"><a href="client_8c.html#ae048b19573a9feee41ce56523d74e98d">act_to_msg</a></div><div class="ttdeci">static error_e act_to_msg(SOCKET *p_socket, msg_parameters_t input_msg_params)</div><div class="ttdoc">Get the user menu input object Valid user input is solely the digit 1 or the digits 2....</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00201">client.c:201</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a919a9825c877603dfaecae0dce5bfba2"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a919a9825c877603dfaecae0dce5bfba2">SERVER_OPPONENT_QUIT</a></div><div class="ttdeci">@ SERVER_OPPONENT_QUIT</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00062">read_write_msg_ext.h:62</a></div></div>
+<div class="ttc" id="atrace_8h_html_ad4ed3d5d742c56a417076ab5e1a5dd29"><div class="ttname"><a href="trace_8h.html#ad4ed3d5d742c56a417076ab5e1a5dd29">DEBUG_PRINT_FUNCTION_START</a></div><div class="ttdeci">#define DEBUG_PRINT_FUNCTION_START()</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00179">trace.h:179</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a8c0f1bb4e3d021ef6b5a189c32b67b4f"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a8c0f1bb4e3d021ef6b5a189c32b67b4f">CLIENT_REQUEST</a></div><div class="ttdeci">@ CLIENT_REQUEST</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00045">read_write_msg_ext.h:45</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232a5756b4548359082e48031f555f4f002e"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a5756b4548359082e48031f555f4f002e">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_SERVER_DENIED_E</a></div><div class="ttdeci">@ ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_SERVER_DENIED_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00130">common_types.h:130</a></div></div>
+<div class="ttc" id="aclient_8c_html_a16541171cbbfbd0ba9d1dc2b1afad0d4"><div class="ttname"><a href="client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4">is_unique_digits</a></div><div class="ttdeci">static int is_unique_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS])</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00447">client.c:447</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7acebd6c9392c1d94385fc6db4f23f61ba"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7acebd6c9392c1d94385fc6db4f23f61ba">SERVER_GAME_RESULTS</a></div><div class="ttdeci">@ SERVER_GAME_RESULTS</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00058">read_write_msg_ext.h:58</a></div></div>
+<div class="ttc" id="atrace_8h_html_aff81c997c9611c2854fd1a9d5bba0c3f"><div class="ttname"><a href="trace_8h.html#aff81c997c9611c2854fd1a9d5bba0c3f">DEBUG_LEVEL_THREE</a></div><div class="ttdeci">#define DEBUG_LEVEL_THREE</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00095">trace.h:95</a></div></div>
+<div class="ttc" id="astructclient__command__line__parms__s_html_aa394c7d6979af651350506f5a5e32d24"><div class="ttname"><a href="structclient__command__line__parms__s.html#aa394c7d6979af651350506f5a5e32d24">client_command_line_parms_s::port_string</a></div><div class="ttdeci">port_string_t port_string</div><div class="ttdef"><b>Definition:</b> <a href="client_2command__line__parsing_8h_source.html#l00050">client/command_line_parsing.h:50</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a5e418008ba4e83cd8962d83607bedcec"><div class="ttname"><a href="common__types_8h.html#a5e418008ba4e83cd8962d83607bedcec">set_output_msg_parameters_to_null</a></div><div class="ttdeci">#define set_output_msg_parameters_to_null()</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00047">common_types.h:47</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232a0f00e66b28da4b30e49aefdcc729b8b9"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a0f00e66b28da4b30e49aefdcc729b8b9">ERROR_USER_CHOSE_TO_QUIT_GAME_IN_MAIN_MENU_E</a></div><div class="ttdeci">@ ERROR_USER_CHOSE_TO_QUIT_GAME_IN_MAIN_MENU_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00128">common_types.h:128</a></div></div>
+<div class="ttc" id="aloglog_8txt_html_ac998e6f9e7f612515f8d3e8fb89fe383"><div class="ttname"><a href="loglog_8txt.html#ac998e6f9e7f612515f8d3e8fb89fe383">parse_command_line_input</a></div><div class="ttdeci">main&lt; task_input_file_name &gt;&lt; priority_input_file_name &gt;&lt; num_of_threads &gt; parse_command_line_input</div><div class="ttdef"><b>Definition:</b> <a href="loglog_8txt_source.html#l00007">loglog.txt:6</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7adc159dce65383e1b7c3ef410733f6f94"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adc159dce65383e1b7c3ef410733f6f94">SERVER_MAIN_MENU</a></div><div class="ttdeci">@ SERVER_MAIN_MENU</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00052">read_write_msg_ext.h:52</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a85ecd40fa911814ae85ce7aaa47bb1ae"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a85ecd40fa911814ae85ce7aaa47bb1ae">SERVER_WIN</a></div><div class="ttdeci">@ SERVER_WIN</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00059">read_write_msg_ext.h:59</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232a4a22d74f2b4be87692a41179115fe0c7"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a4a22d74f2b4be87692a41179115fe0c7">ERROR_FAILED_CREATING_A_SOCKET_E</a></div><div class="ttdeci">@ ERROR_FAILED_CREATING_A_SOCKET_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00119">common_types.h:119</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_adb4054659e7090fc1be50b26c969ba1d"><div class="ttname"><a href="structmsg__parameters__s.html#adb4054659e7090fc1be50b26c969ba1d">msg_parameters_s::e_msg_type</a></div><div class="ttdeci">message_type_e e_msg_type</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00076">read_write_msg_ext.h:76</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a31f36c9ebfcc3d6687982ec6a1c5a7b6"><div class="ttname"><a href="read__write__msg__ext_8h.html#a31f36c9ebfcc3d6687982ec6a1c5a7b6">MAX_ERROR_STRING_LENGTH</a></div><div class="ttdeci">#define MAX_ERROR_STRING_LENGTH</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00027">read_write_msg_ext.h:27</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7ae812112d4ec24712ea5802197c27db4f"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7ae812112d4ec24712ea5802197c27db4f">CLIENT_VERSUS</a></div><div class="ttdeci">@ CLIENT_VERSUS</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00046">read_write_msg_ext.h:46</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_a07da6fcacceeb7e6bedd59d1e9964870"><div class="ttname"><a href="structmsg__parameters__s.html#a07da6fcacceeb7e6bedd59d1e9964870">msg_parameters_s::four_digits_number</a></div><div class="ttdeci">char four_digits_number[(4)+1]</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00072">read_write_msg_ext.h:72</a></div></div>
 <div class="ttc" id="aclient_8c_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00028">client.c:28</a></div></div>
-<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a></div><div class="ttdeci">@ ERROR_OK</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00043">common_types.h:43</a></div></div>
-<div class="ttc" id="atrace_8h_html_afc1d6b99a4c100f81e56388c74b63cf1"><div class="ttname"><a href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a></div><div class="ttdeci">#define DEBUG_PRINT_FUNCTION_END()</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00160">trace.h:160</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232a76f6f5574dcd93440568a98f40bebc58"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232a76f6f5574dcd93440568a98f40bebc58">ERROR_FAILED_TO_STARTUP_WSA_E</a></div><div class="ttdeci">@ ERROR_FAILED_TO_STARTUP_WSA_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00118">common_types.h:118</a></div></div>
+<div class="ttc" id="astructclient__command__line__parms__s_html_ad4cfee924c49e9da51a43576415ad8d1"><div class="ttname"><a href="structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1">client_command_line_parms_s::ip_string</a></div><div class="ttdeci">char ip_string[(16)]</div><div class="ttdef"><b>Definition:</b> <a href="client_2command__line__parsing_8h_source.html#l00047">client/command_line_parsing.h:47</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a17e333794ae761cd55ec6fd6fc0f1bac"><div class="ttname"><a href="read__write__msg__ext_8h.html#a17e333794ae761cd55ec6fd6fc0f1bac">MAX_MSG_SIZE</a></div><div class="ttdeci">#define MAX_MSG_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00028">read_write_msg_ext.h:28</a></div></div>
+<div class="ttc" id="atrace_8h_html_a88edd2aa4feabff4af21a997d5d8aa23"><div class="ttname"><a href="trace_8h.html#a88edd2aa4feabff4af21a997d5d8aa23">DEBUG_PRINT</a></div><div class="ttdeci">#define DEBUG_PRINT(...)</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00177">trace.h:177</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_aa14f68373e35f1e67f787f92fc0b778a"><div class="ttname"><a href="common__types_8h.html#aa14f68373e35f1e67f787f92fc0b778a">SERVER_ADDRESS_STR_WIDE</a></div><div class="ttdeci">#define SERVER_ADDRESS_STR_WIDE</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00028">common_types.h:28</a></div></div>
+<div class="ttc" id="atrace_8h_html_a292846ac16d6ae50158612cc56ed8654"><div class="ttname"><a href="trace_8h.html#a292846ac16d6ae50158612cc56ed8654">YELLOW__CONSOLE_COLOR_CODE</a></div><div class="ttdeci">#define YELLOW__CONSOLE_COLOR_CODE</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00036">trace.h:36</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a450888cabcc3550905acf612357808c8"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a450888cabcc3550905acf612357808c8">CLIENT_PLAYER_MOVE</a></div><div class="ttdeci">@ CLIENT_PLAYER_MOVE</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00048">read_write_msg_ext.h:48</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a></div><div class="ttdeci">error_e</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00070">common_types.h:71</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a4930493be73372e686964ad679b3a8e8"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a4930493be73372e686964ad679b3a8e8">CLIENT_SETUP</a></div><div class="ttdeci">@ CLIENT_SETUP</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00047">read_write_msg_ext.h:47</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a6dea92e983397202ddfd1465d7e2d527"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a6dea92e983397202ddfd1465d7e2d527">SERVER_NO_OPPONENTS</a></div><div class="ttdeci">@ SERVER_NO_OPPONENTS</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00061">read_write_msg_ext.h:61</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232ab9bed49ba5fd871b801ba0a10a082806"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232ab9bed49ba5fd871b801ba0a10a082806">ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_FAILED_CONNECTION_E</a></div><div class="ttdeci">@ ERROR_USER_CHOSE_TO_QUIT_GAME_AFTER_FAILED_CONNECTION_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00129">common_types.h:129</a></div></div>
+<div class="ttc" id="aclient_8h_html_a1098712ddf4ee1701ea37770928ea8c8"><div class="ttname"><a href="client_8h.html#a1098712ddf4ee1701ea37770928ea8c8">MAIN_MENU_QUIT</a></div><div class="ttdeci">#define MAIN_MENU_QUIT</div><div class="ttdef"><b>Definition:</b> <a href="client_8h_source.html#l00036">client.h:36</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7afa119b289f464888945daab2c7b5bf0c"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7afa119b289f464888945daab2c7b5bf0c">SERVER_SETUP_REQUEST</a></div><div class="ttdeci">@ SERVER_SETUP_REQUEST</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00056">read_write_msg_ext.h:56</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html"><div class="ttname"><a href="structmsg__parameters__s.html">msg_parameters_s</a></div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00069">read_write_msg_ext.h:70</a></div></div>
+<div class="ttc" id="aclient_8c_html_a33954be5114778ebfdebf05166db1d66"><div class="ttname"><a href="client_8c.html#a33954be5114778ebfdebf05166db1d66">print_game_result</a></div><div class="ttdeci">static void print_game_result(const msg_parameters_t game_results_params)</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00487">client.c:487</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a819f893c4e38c5f3d73bca82a9a2ac51"><div class="ttname"><a href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a></div><div class="ttdeci">#define MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00025">common_types.h:25</a></div></div>
+<div class="ttc" id="astructclient__command__line__parms__s_html_a2af36ae238b91269fefac33f1ace686a"><div class="ttname"><a href="structclient__command__line__parms__s.html#a2af36ae238b91269fefac33f1ace686a">client_command_line_parms_s::username_string</a></div><div class="ttdeci">char username_string[USERNAME_MAX_LEGNTH_STRING]</div><div class="ttdef"><b>Definition:</b> <a href="client_2command__line__parsing_8h_source.html#l00048">client/command_line_parsing.h:48</a></div></div>
+<div class="ttc" id="asend__recv__messages__ext_8h_html_aef202c53468fdb15db1e7e1b75206bba"><div class="ttname"><a href="send__recv__messages__ext_8h.html#aef202c53468fdb15db1e7e1b75206bba">send_msg</a></div><div class="ttdeci">error_e send_msg(const message_type_e e_msg_type, char *msg_parameters[(4)], SOCKET p_transmit_socket)</div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7adfd1faa5f76c73bc546403e79b2c5f24"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adfd1faa5f76c73bc546403e79b2c5f24">SERVER_APPROVED</a></div><div class="ttdeci">@ SERVER_APPROVED</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00053">read_write_msg_ext.h:53</a></div></div>
+<div class="ttc" id="asend__recv__messages__ext_8h_html_a11fe50688f0df18c280049634dc96de2"><div class="ttname"><a href="send__recv__messages__ext_8h.html#a11fe50688f0df18c280049634dc96de2">receive_msg</a></div><div class="ttdeci">error_e receive_msg(SOCKET recv_socket, msg_parameters_t *msg_params)</div><div class="ttdef"><b>Definition:</b> <a href="socket__send__recv__tools_8c_source.html#l00033">socket_send_recv_tools.c:33</a></div></div>
+<div class="ttc" id="atrace_8h_html_a4184b28a8f43f65b009e1e7f20ae612c"><div class="ttname"><a href="trace_8h.html#a4184b28a8f43f65b009e1e7f20ae612c">SET_CONSOLE_COLOR</a></div><div class="ttdeci">#define SET_CONSOLE_COLOR(_console_color)</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00072">trace.h:72</a></div></div>
+<div class="ttc" id="aclient_8h_html_af75be8107911ddf46c7db5b10f3889b5"><div class="ttname"><a href="client_8h.html#af75be8107911ddf46c7db5b10f3889b5">FAIL_MENU_QUIT</a></div><div class="ttdeci">#define FAIL_MENU_QUIT</div><div class="ttdef"><b>Definition:</b> <a href="client_8h_source.html#l00038">client.h:38</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a5f1c24869f829838b2a0c3407fa3e7d2"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5f1c24869f829838b2a0c3407fa3e7d2">SERVER_INVITE</a></div><div class="ttdeci">@ SERVER_INVITE</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00055">read_write_msg_ext.h:55</a></div></div>
+<div class="ttc" id="astructclient__command__line__parms__s_html"><div class="ttname"><a href="structclient__command__line__parms__s.html">client_command_line_parms_s</a></div><div class="ttdef"><b>Definition:</b> <a href="client_2command__line__parsing_8h_source.html#l00045">client/command_line_parsing.h:46</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a678e3f58c1f09ca9cb330525943c5fcf"><div class="ttname"><a href="read__write__msg__ext_8h.html#a678e3f58c1f09ca9cb330525943c5fcf">MAX_NUMBER_OF_PARAMETERS_IN_MSG</a></div><div class="ttdeci">#define MAX_NUMBER_OF_PARAMETERS_IN_MSG</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00031">read_write_msg_ext.h:31</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232aadeb5032c03491611646c1c64f7c0e0c">ERROR_OK</a></div><div class="ttdeci">@ ERROR_OK</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00073">common_types.h:73</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_ac285d9b4b9f40809d6f43c9758a27b22"><div class="ttname"><a href="structmsg__parameters__s.html#ac285d9b4b9f40809d6f43c9758a27b22">msg_parameters_s::server_denied_reason</a></div><div class="ttdeci">char server_denied_reason[(260)]</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00073">read_write_msg_ext.h:73</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_a348090d05a8f79a7fcbd04b35bdfd5b0"><div class="ttname"><a href="structmsg__parameters__s.html#a348090d05a8f79a7fcbd04b35bdfd5b0">msg_parameters_s::username</a></div><div class="ttdeci">char username[(21)]</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00071">read_write_msg_ext.h:71</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a5308d98e7314622fea6767d01c00a0b9"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5308d98e7314622fea6767d01c00a0b9">SERVER_DRAW</a></div><div class="ttdeci">@ SERVER_DRAW</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00060">read_write_msg_ext.h:60</a></div></div>
+<div class="ttc" id="aclient_8c_html_aca2188e9c9465c55f0b09ff5979a17f3"><div class="ttname"><a href="client_8c.html#aca2188e9c9465c55f0b09ff5979a17f3">get_four_unique_digits_from_user</a></div><div class="ttdeci">static error_e get_four_unique_digits_from_user(char user_4_digits[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS])</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00361">client.c:361</a></div></div>
+<div class="ttc" id="aclient_8c_html_af37e90d89a9958c256bbacae100b5d4c"><div class="ttname"><a href="client_8c.html#af37e90d89a9958c256bbacae100b5d4c">get_user_menu_input</a></div><div class="ttdeci">static int get_user_menu_input()</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00329">client.c:329</a></div></div>
+<div class="ttc" id="aclient_8c_html_aadea52a49157a5db6287b7007d70e224"><div class="ttname"><a href="client_8c.html#aadea52a49157a5db6287b7007d70e224">is_four_digits</a></div><div class="ttdeci">static int is_four_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS])</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00419">client.c:419</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a668a6ad3d1e8198812413c80da3e44fd"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a668a6ad3d1e8198812413c80da3e44fd">SERVER_DENIED</a></div><div class="ttdeci">@ SERVER_DENIED</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00054">read_write_msg_ext.h:54</a></div></div>
+<div class="ttc" id="aclient_8c_html_ac8c1cdb7241c10555ae16c55d35a48df"><div class="ttname"><a href="client_8c.html#ac8c1cdb7241c10555ae16c55d35a48df">client_main_menu</a></div><div class="ttdeci">static int client_main_menu()</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00521">client.c:521</a></div></div>
+<div class="ttc" id="acommon__types_8h_html_a09c25ad25f326a930ae42ace60b70232abe1fccf9568d1409c0d345d822681d59"><div class="ttname"><a href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232abe1fccf9568d1409c0d345d822681d59">ERROR_FATAL_ERROR_E</a></div><div class="ttdeci">@ ERROR_FATAL_ERROR_E</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00074">common_types.h:74</a></div></div>
+<div class="ttc" id="atrace_8h_html_a9e1da3f98202e27d74c6309dec5e8dbf"><div class="ttname"><a href="trace_8h.html#a9e1da3f98202e27d74c6309dec5e8dbf">print_error_msg</a></div><div class="ttdeci">#define print_error_msg(...)</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00048">trace.h:48</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7a22ea340157fa027437cc0a38351c648b"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a22ea340157fa027437cc0a38351c648b">SERVER_PLAYER_MOVE_REQUEST</a></div><div class="ttdeci">@ SERVER_PLAYER_MOVE_REQUEST</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00057">read_write_msg_ext.h:57</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_a27c28957aecebfb15e0b0fe54ff9f7eb"><div class="ttname"><a href="structmsg__parameters__s.html#a27c28957aecebfb15e0b0fe54ff9f7eb">msg_parameters_s::num_of_cows</a></div><div class="ttdeci">int num_of_cows</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00075">read_write_msg_ext.h:75</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_ab1b6ca1d07f8dedd4d8a2511197bc785"><div class="ttname"><a href="read__write__msg__ext_8h.html#ab1b6ca1d07f8dedd4d8a2511197bc785">get_msg_string</a></div><div class="ttdeci">const char *const get_msg_string(message_type_e e_msg_type)</div><div class="ttdoc">Get the msg string object.</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg_8c_source.html#l00082">read_write_msg.c:82</a></div></div>
+<div class="ttc" id="astructmsg__parameters__s_html_a42584da163d2d62e9ad3b02b25dcb3d0"><div class="ttname"><a href="structmsg__parameters__s.html#a42584da163d2d62e9ad3b02b25dcb3d0">msg_parameters_s::num_of_bulls</a></div><div class="ttdeci">int num_of_bulls</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00074">read_write_msg_ext.h:74</a></div></div>
+<div class="ttc" id="aclient_8c_html_a8fa505845830a310b128a7e2d8fc351f"><div class="ttname"><a href="client_8c.html#a8fa505845830a310b128a7e2d8fc351f">client_options_when_failed_to_connect</a></div><div class="ttdeci">static int client_options_when_failed_to_connect()</div><div class="ttdef"><b>Definition:</b> <a href="client_8c_source.html#l00500">client.c:500</a></div></div>
+<div class="ttc" id="atrace_8h_html_afc1d6b99a4c100f81e56388c74b63cf1"><div class="ttname"><a href="trace_8h.html#afc1d6b99a4c100f81e56388c74b63cf1">DEBUG_PRINT_FUNCTION_END</a></div><div class="ttdeci">#define DEBUG_PRINT_FUNCTION_END()</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00180">trace.h:180</a></div></div>
+<div class="ttc" id="aclient_8h_html_a954ce12b5329a3d27c78972e9c147018"><div class="ttname"><a href="client_8h.html#a954ce12b5329a3d27c78972e9c147018">MAIN_MENU_PLAY_VERSUS</a></div><div class="ttdeci">#define MAIN_MENU_PLAY_VERSUS</div><div class="ttdef"><b>Definition:</b> <a href="client_8h_source.html#l00035">client.h:35</a></div></div>
+<div class="ttc" id="atrace_8h_html_a6c45057238d860cdc3693e9802b95ad6"><div class="ttname"><a href="trace_8h.html#a6c45057238d860cdc3693e9802b95ad6">DEBUG_LEVEL_TWO</a></div><div class="ttdeci">#define DEBUG_LEVEL_TWO</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00094">trace.h:94</a></div></div>
+<div class="ttc" id="aread__write__msg__ext_8h_html_a26b86e6fe63d5c00ba548183812fdbe7aa400fe832dc5193688c9a5e61c0e48ed"><div class="ttname"><a href="read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7aa400fe832dc5193688c9a5e61c0e48ed">CLIENT_DISCONNECT</a></div><div class="ttdeci">@ CLIENT_DISCONNECT</div><div class="ttdef"><b>Definition:</b> <a href="read__write__msg__ext_8h_source.html#l00049">read_write_msg_ext.h:49</a></div></div>
+<div class="ttc" id="atrace_8h_html_a36553cf06fe235317ed52ed04c9371ab"><div class="ttname"><a href="trace_8h.html#a36553cf06fe235317ed52ed04c9371ab">SET_CONSOLE_WHITE</a></div><div class="ttdeci">#define SET_CONSOLE_WHITE(...)</div><div class="ttdef"><b>Definition:</b> <a href="trace_8h_source.html#l00073">trace.h:73</a></div></div>
 <div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div><div class="ttdoc">Delartion of private functions of queue module.</div></div>
+<div class="ttc" id="acommon__types_8h_html_a7f28dc96228653e7742a5687d23e9239"><div class="ttname"><a href="common__types_8h.html#a7f28dc96228653e7742a5687d23e9239">CHECK_AND_BREAK</a></div><div class="ttdeci">#define CHECK_AND_BREAK(_status_)</div><div class="ttdef"><b>Definition:</b> <a href="common__types_8h_source.html#l00035">common_types.h:35</a></div></div>
+<div class="ttc" id="asend__recv__messages__ext_8h_html_adc14a18b394d7e5f75e628ccf3e5feeb"><div class="ttname"><a href="send__recv__messages__ext_8h.html#adc14a18b394d7e5f75e628ccf3e5feeb">wait_for_socket_shutdown</a></div><div class="ttdeci">error_e wait_for_socket_shutdown(SOCKET recv_socket)</div><div class="ttdef"><b>Definition:</b> <a href="socket__send__recv__tools_8c_source.html#l00135">socket_send_recv_tools.c:135</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_16e9a5b3a460535635efdb713ea543e2.html">Ex4</a></li><li class="navelem"><a class="el" href="dir_040113c39c720640d74772a947819e56.html">client</a></li><li class="navelem"><a class="el" href="client_8c.html">client.c</a></li>
-    <li class="footer">Generated on Thu Dec 24 2020 11:22:40 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Sun Jan 17 2021 13:12:35 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

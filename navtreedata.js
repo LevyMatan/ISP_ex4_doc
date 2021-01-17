@@ -34,12 +34,12 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Ex-4: Server", "md___users_matanlevy_learning_operating_systems_hw4_server.html", [
-      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md7", null ],
-      [ "Inter thread communication", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md8", null ]
+      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md13", null ],
+      [ "Inter thread communication", "md___users_matanlevy_learning_operating_systems_hw4_server.html#autotoc_md14", null ]
     ] ],
     [ "Ex-4: Client", "md___users_matanlevy_learning_operating_systems_hw4_client.html", [
-      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md10", null ],
-      [ "Pitfalls and notes", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md11", null ]
+      [ "Flow chart", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md16", null ],
+      [ "Pitfalls and notes", "md___users_matanlevy_learning_operating_systems_hw4_client.html#autotoc_md17", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -52,7 +52,7 @@ var NAVTREE =
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
@@ -66,7 +66,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"read__write__msg__ext_8h.html#a17e333794ae761cd55ec6fd6fc0f1bac"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,12 +1,21 @@
 var searchData=
 [
-  ['magenta_5f_5fconsole_5fcolor_5fcode_297',['MAGENTA__CONSOLE_COLOR_CODE',['../trace_8h.html#ab57461fba1d7143b5d2e09c5dd277e6b',1,'trace.h']]],
-  ['max_5fallowed_5fargs_298',['MAX_ALLOWED_ARGS',['../command__line__parsing_8h.html#a5ae504ce81a8e1ee0ca5098042613cf9',1,'command_line_parsing.h']]],
-  ['max_5flog_5ffunction_5fline_299',['MAX_LOG_FUNCTION_LINE',['../trace_8h.html#a3550c5f27101577a40a6667b145fdca3',1,'trace.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fin_5fa_5fline_300',['MAX_NUMBER_OF_CHARECTERS_IN_A_LINE',['../file__utils_8h.html#a41be1999e7d61e63a2f1a22538dd08cd',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fin_5fpriority_5ffile_5fline_301',['MAX_NUMBER_OF_CHARECTERS_IN_PRIORITY_FILE_LINE',['../file__utils_8h.html#ae2cea122fa8c16ca3ea0a73bd930d984',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fof_5ftask_302',['MAX_NUMBER_OF_CHARECTERS_OF_TASK',['../file__utils_8h.html#aef0eee09a3759dcadf2bd6c0eb9f6ade',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fdigits_303',['MAX_NUMBER_OF_DIGITS',['../file__utils__ext_8h.html#a9b118d96de984eb21f418e288622ecde',1,'file_utils_ext.h']]],
-  ['max_5fthread_5fnum_304',['MAX_THREAD_NUM',['../command__line__parsing_8h.html#a7370ddc11d266a9c68a40d91bf05927e',1,'command_line_parsing.h']]],
-  ['min_5fallowed_5fargs_305',['MIN_ALLOWED_ARGS',['../command__line__parsing_8h.html#aa9d07ba7cb4d165a8df1743bb47ba2f1',1,'command_line_parsing.h']]]
+  ['magenta_5f_5fconsole_5fcolor_5fcode_587',['MAGENTA__CONSOLE_COLOR_CODE',['../trace_8h.html#ab57461fba1d7143b5d2e09c5dd277e6b',1,'trace.h']]],
+  ['main_5fmenu_5fplay_5fversus_588',['MAIN_MENU_PLAY_VERSUS',['../client_8h.html#a954ce12b5329a3d27c78972e9c147018',1,'client.h']]],
+  ['main_5fmenu_5fquit_589',['MAIN_MENU_QUIT',['../client_8h.html#a1098712ddf4ee1701ea37770928ea8c8',1,'client.h']]],
+  ['max_5fallowed_5fargs_590',['MAX_ALLOWED_ARGS',['../server_2command__line__parsing_8h.html#a5ae504ce81a8e1ee0ca5098042613cf9',1,'MAX_ALLOWED_ARGS():&#160;command_line_parsing.h'],['../client_2command__line__parsing_8h.html#a5ae504ce81a8e1ee0ca5098042613cf9',1,'MAX_ALLOWED_ARGS():&#160;command_line_parsing.h']]],
+  ['max_5fallowed_5fplayers_591',['MAX_ALLOWED_PLAYERS',['../server_8h.html#a018df977a6322dcd184fdf45301a066c',1,'server.h']]],
+  ['max_5ferror_5fstring_5flength_592',['MAX_ERROR_STRING_LENGTH',['../read__write__msg__ext_8h.html#a31f36c9ebfcc3d6687982ec6a1c5a7b6',1,'read_write_msg_ext.h']]],
+  ['max_5fmsg_5fsize_593',['MAX_MSG_SIZE',['../read__write__msg__ext_8h.html#a17e333794ae761cd55ec6fd6fc0f1bac',1,'read_write_msg_ext.h']]],
+  ['max_5fnumber_5fof_5fcharecters_5fin_5fa_5fline_594',['MAX_NUMBER_OF_CHARECTERS_IN_A_LINE',['../file__utils_8h.html#a41be1999e7d61e63a2f1a22538dd08cd',1,'file_utils.h']]],
+  ['max_5fnumber_5fof_5fcharecters_5fin_5fpriority_5ffile_5fline_595',['MAX_NUMBER_OF_CHARECTERS_IN_PRIORITY_FILE_LINE',['../file__utils_8h.html#ae2cea122fa8c16ca3ea0a73bd930d984',1,'file_utils.h']]],
+  ['max_5fnumber_5fof_5fcharecters_5fof_5ftask_596',['MAX_NUMBER_OF_CHARECTERS_OF_TASK',['../file__utils_8h.html#aef0eee09a3759dcadf2bd6c0eb9f6ade',1,'file_utils.h']]],
+  ['max_5fnumber_5fof_5fdigits_5fin_5fplayer_5fguess_597',['MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS',['../common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51',1,'common_types.h']]],
+  ['max_5fnumber_5fof_5fparameters_5fin_5fmsg_598',['MAX_NUMBER_OF_PARAMETERS_IN_MSG',['../read__write__msg__ext_8h.html#a678e3f58c1f09ca9cb330525943c5fcf',1,'read_write_msg_ext.h']]],
+  ['max_5fnumber_5fof_5fport_5fdigits_599',['MAX_NUMBER_OF_PORT_DIGITS',['../common__command__line__parsing__ext_8h.html#a8cabe28038a31c7d5acbe02a9c3d2d4d',1,'common_command_line_parsing_ext.h']]],
+  ['max_5fport_5fnum_600',['MAX_PORT_NUM',['../common__command__line__parsing_8h.html#a9beb6309f69547829ed3c52e14b8eea7',1,'common_command_line_parsing.h']]],
+  ['max_5fstring_5flength_5fof_5fmessage_5ftype_601',['MAX_STRING_LENGTH_OF_MESSAGE_TYPE',['../read__write__msg__ext_8h.html#a48bb52920aa3615c74225d40e4e04675',1,'read_write_msg_ext.h']]],
+  ['maximum_5fread_5fbuffer_5fsize_5fin_5fbytes_602',['MAXIMUM_READ_BUFFER_SIZE_IN_BYTES',['../inter__thread__communication_8h.html#a2a18d11c09cf1e6e81e3854c5142c8ea',1,'inter_thread_communication.h']]],
+  ['min_5fallowed_5fargs_603',['MIN_ALLOWED_ARGS',['../server_2command__line__parsing_8h.html#aa9d07ba7cb4d165a8df1743bb47ba2f1',1,'MIN_ALLOWED_ARGS():&#160;command_line_parsing.h'],['../client_2command__line__parsing_8h.html#aa9d07ba7cb4d165a8df1743bb47ba2f1',1,'MIN_ALLOWED_ARGS():&#160;command_line_parsing.h']]],
+  ['min_5fport_5fnum_604',['MIN_PORT_NUM',['../common__command__line__parsing_8h.html#a087ea9fef6dae1797db888f581b5ae11',1,'common_command_line_parsing.h']]]
 ];

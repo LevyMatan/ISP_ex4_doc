@@ -94,35 +94,58 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <div class="contents">
 <div class="textblock">Here is a list of all struct and union fields with links to the structures/unions they belong to:</div><ul>
-<li>a_task_file_name
-: <a class="el" href="structfactori__args__s.html#a0ae7de72f63571717d15a5668b83c8df">factori_args_s</a>
+<li>comm_socket
+: <a class="el" href="structclient__handler__params__s.html#a9ff34dbea878b62ab88fbdf6007cbf2d">client_handler_params_s</a>
 </li>
-<li>count
-: <a class="el" href="structqueue__s.html#a25c1dd04b0c392c766af21b5381fe47b">queue_s</a>
+<li>created_comm_file
+: <a class="el" href="structclient__handler__params__s.html#a8fb975e6838ec25cb81713a5feeaf28b">client_handler_params_s</a>
 </li>
 <li>critical_section_mutex_handle
 : <a class="el" href="structlock__s.html#a765bd5f0ba5d88181352ba83a6ee4d2a">lock_s</a>
 </li>
-<li>data
-: <a class="el" href="structqueue__elem__s.html#a4132b46b4901a516175050042022a791">queue_elem_s</a>
+<li>e_msg_type
+: <a class="el" href="structmsg__parameters__s.html#adb4054659e7090fc1be50b26c969ba1d">msg_parameters_s</a>
 </li>
-<li>num_of_tasks
-: <a class="el" href="structfactori__args__s.html#a6a3ab6084b270ff564598eaa05562681">factori_args_s</a>
+<li>four_digits_number
+: <a class="el" href="structmsg__parameters__s.html#a07da6fcacceeb7e6bedd59d1e9964870">msg_parameters_s</a>
 </li>
-<li>num_of_threads
-: <a class="el" href="structfactori__args__s.html#a639f825edc175c42483bba7c67ff7ff7">factori_args_s</a>
+<li>ip_string
+: <a class="el" href="structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1">client_command_line_parms_s</a>
 </li>
-<li>p_first_elem
-: <a class="el" href="structqueue__s.html#a05ddcc010d2d43748bc152277f95a86a">queue_s</a>
+<li>last_position_in_file
+: <a class="el" href="structclient__handler__params__s.html#aeb2add249b5d0f8069b4626c780e723e">client_handler_params_s</a>
 </li>
-<li>p_last_elem
-: <a class="el" href="structqueue__s.html#af74d67d55efd6aad938f2b69b6b4f204">queue_s</a>
+<li>my_four_digits_number
+: <a class="el" href="structclient__handler__params__s.html#ac582719e338540c81f13517ee20ddff0">client_handler_params_s</a>
 </li>
-<li>p_next
-: <a class="el" href="structqueue__elem__s.html#a182e8469471483e87a4595e59ba637ae">queue_elem_s</a>
+<li>my_index
+: <a class="el" href="structclient__handler__params__s.html#ab1dc6f66bed31e5431cd23a5d01dbb2b">client_handler_params_s</a>
 </li>
-<li>p_priority_file_name
-: <a class="el" href="structfactori__args__s.html#a05369ef03cb7e97fd2a5448fa4993efb">factori_args_s</a>
+<li>my_name
+: <a class="el" href="structclient__handler__params__s.html#a8bfda519f7e5eeefa6f6f541c9b20874">client_handler_params_s</a>
+</li>
+<li>num_of_bulls
+: <a class="el" href="structmsg__parameters__s.html#a42584da163d2d62e9ad3b02b25dcb3d0">msg_parameters_s</a>
+</li>
+<li>num_of_cows
+: <a class="el" href="structmsg__parameters__s.html#a27c28957aecebfb15e0b0fe54ff9f7eb">msg_parameters_s</a>
+</li>
+<li>opponent_index
+: <a class="el" href="structclient__handler__params__s.html#a135ed7972cbf40830ad41479f2891822">client_handler_params_s</a>
+</li>
+<li>opponent_name
+: <a class="el" href="structclient__handler__params__s.html#afafda2143102f00ccd4d6bb09b3cb169">client_handler_params_s</a>
+</li>
+<li>p_players_num_lock
+: <a class="el" href="structclient__handler__params__s.html#ac8c4664bbc543ad3c12773dcdefdea3f">client_handler_params_s</a>
+</li>
+<li>port_num
+: <a class="el" href="structclient__command__line__parms__s.html#a76c0878d8299b3049b39a84f5179c926">client_command_line_parms_s</a>
+, <a class="el" href="structserver__command__line__parms__s.html#aa0334289629af128a9c799a8707a82f0">server_command_line_parms_s</a>
+</li>
+<li>port_string
+: <a class="el" href="structclient__command__line__parms__s.html#aa394c7d6979af651350506f5a5e32d24">client_command_line_parms_s</a>
+, <a class="el" href="structserver__command__line__parms__s.html#ae893261b8140819ace1bd4647b939fcc">server_command_line_parms_s</a>
 </li>
 <li>readers
 : <a class="el" href="structlock__s.html#aa1080acaffe76998081127bc1bf15ef7">lock_s</a>
@@ -130,8 +153,17 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>readers_semaphore_handle
 : <a class="el" href="structlock__s.html#ae534931d886b80e145a2e23a887541db">lock_s</a>
 </li>
+<li>server_denied_reason
+: <a class="el" href="structmsg__parameters__s.html#ac285d9b4b9f40809d6f43c9758a27b22">msg_parameters_s</a>
+</li>
 <li>turnstile_mutex_handle
 : <a class="el" href="structlock__s.html#a18d070df416f56fc09cecd666f822a44">lock_s</a>
+</li>
+<li>username
+: <a class="el" href="structmsg__parameters__s.html#a348090d05a8f79a7fcbd04b35bdfd5b0">msg_parameters_s</a>
+</li>
+<li>username_string
+: <a class="el" href="structclient__command__line__parms__s.html#a2af36ae238b91269fefac33f1ace686a">client_command_line_parms_s</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -139,7 +171,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Dec 24 2020 11:22:40 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Sun Jan 17 2021 13:12:36 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

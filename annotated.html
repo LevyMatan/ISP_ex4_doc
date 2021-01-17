@@ -99,10 +99,11 @@ $(document).ready(function(){initNavTree('annotated.html',''); initResizable(); 
 <div class="contents">
 <div class="textblock">Here are the data structures with brief descriptions:</div><div class="directory">
 <table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structfactori__args__s.html" target="_self">factori_args_s</a></td><td class="desc">All the command line argmuents after parsing them. task file name - hard copy information from argv[0] to remove dependency of shared memory. This string is going to be read by multiple threads. priority file name number of threads number of tasks: should match te number of lines in the tasks and priority files </td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structlock__s.html" target="_self">lock_s</a></td><td class="desc">The struct has three synchornization objects and a counter: two mutexes, and one semaphore. All three will be used to protect the readers and writers to touch the shared resources at the same time </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structqueue__elem__s.html" target="_self">queue_elem_s</a></td><td class="desc">An element of FIFO queue. Hold on a generic data, here limited to a DWORD type. And a pointer to the following element in the queue. Last element is pointing to NULL </td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structqueue__s.html" target="_self">queue_s</a></td><td class="desc">A queue object. Has pointer to last and first elements in the queue. Also hold a counter on the number of element, this is no an obligatory property, but it allows better dubging and can be useful in other cases. The queue is considered valid when count and first and last element state are matching. That is, if count equals to zero, both first and last element must point to NULL. Overwise, when count is one, both first and last element must point to the same element. Otherwise, when count is gretaer than one, each has to point to another element </td></tr>
+<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structclient__command__line__parms__s.html" target="_self">client_command_line_parms_s</a></td><td class="desc"></td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structclient__handler__params__s.html" target="_self">client_handler_params_s</a></td><td class="desc"></td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structlock__s.html" target="_self">lock_s</a></td><td class="desc">The struct has three synchornization objects and a counter: two mutexes, and one semaphore. All three will be used to protect the readers and writers to touch the shared resources at the same time </td></tr>
+<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structmsg__parameters__s.html" target="_self">msg_parameters_s</a></td><td class="desc"></td></tr>
+<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structserver__command__line__parms__s.html" target="_self">server_command_line_parms_s</a></td><td class="desc"></td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->
@@ -110,7 +111,7 @@ $(document).ready(function(){initNavTree('annotated.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Dec 24 2020 11:22:40 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Sun Jan 17 2021 13:12:36 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

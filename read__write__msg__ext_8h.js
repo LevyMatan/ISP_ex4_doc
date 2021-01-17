@@ -1,0 +1,38 @@
+var read__write__msg__ext_8h =
+[
+    [ "msg_parameters_s", "structmsg__parameters__s.html", "structmsg__parameters__s" ],
+    [ "MAX_ERROR_STRING_LENGTH", "read__write__msg__ext_8h.html#a31f36c9ebfcc3d6687982ec6a1c5a7b6", null ],
+    [ "MAX_MSG_SIZE", "read__write__msg__ext_8h.html#a17e333794ae761cd55ec6fd6fc0f1bac", null ],
+    [ "MAX_NUMBER_OF_PARAMETERS_IN_MSG", "read__write__msg__ext_8h.html#a678e3f58c1f09ca9cb330525943c5fcf", null ],
+    [ "MAX_STRING_LENGTH_OF_MESSAGE_TYPE", "read__write__msg__ext_8h.html#a48bb52920aa3615c74225d40e4e04675", null ],
+    [ "SERVER_GAME_RESULTS_BULLS_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#a013865aa914ded08bfa436b2ac924d2d", null ],
+    [ "SERVER_GAME_RESULTS_COWS_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#ab59d66649224bd58b038cfed0cff5a13", null ],
+    [ "SERVER_GAME_RESULTS_OPPONENT_GUESS_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#ab4ca3d021fb374bed296f4b277bf1bd6", null ],
+    [ "SERVER_GAME_RESULTS_USERNAME_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#a3c072afb2c043a2156e69cb482f598aa", null ],
+    [ "SERVER_WIN_OPPONENT_NUMBER_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#a2d8ca926af56bad0bc60447dbfbf1d92", null ],
+    [ "SERVER_WIN_USERNAME_PARAM_ARG_INDEX", "read__write__msg__ext_8h.html#add97b8c8fa1e9edc8f8649a28ed193ab", null ],
+    [ "message_type_e", "read__write__msg__ext_8h.html#abc36fe8bd717f53ece4f2445c9dbd91f", null ],
+    [ "msg_parameters_t", "read__write__msg__ext_8h.html#a203b4a4285ac455b652ed8f0a98b98f2", null ],
+    [ "message_type_e", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7", [
+      [ "CLIENT_REQUEST", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a8c0f1bb4e3d021ef6b5a189c32b67b4f", null ],
+      [ "CLIENT_VERSUS", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7ae812112d4ec24712ea5802197c27db4f", null ],
+      [ "CLIENT_SETUP", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a4930493be73372e686964ad679b3a8e8", null ],
+      [ "CLIENT_PLAYER_MOVE", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a450888cabcc3550905acf612357808c8", null ],
+      [ "CLIENT_DISCONNECT", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7aa400fe832dc5193688c9a5e61c0e48ed", null ],
+      [ "SERVER_MAIN_MENU", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adc159dce65383e1b7c3ef410733f6f94", null ],
+      [ "SERVER_APPROVED", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7adfd1faa5f76c73bc546403e79b2c5f24", null ],
+      [ "SERVER_DENIED", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a668a6ad3d1e8198812413c80da3e44fd", null ],
+      [ "SERVER_INVITE", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5f1c24869f829838b2a0c3407fa3e7d2", null ],
+      [ "SERVER_SETUP_REQUEST", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7afa119b289f464888945daab2c7b5bf0c", null ],
+      [ "SERVER_PLAYER_MOVE_REQUEST", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a22ea340157fa027437cc0a38351c648b", null ],
+      [ "SERVER_GAME_RESULTS", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7acebd6c9392c1d94385fc6db4f23f61ba", null ],
+      [ "SERVER_WIN", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a85ecd40fa911814ae85ce7aaa47bb1ae", null ],
+      [ "SERVER_DRAW", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a5308d98e7314622fea6767d01c00a0b9", null ],
+      [ "SERVER_NO_OPPONENTS", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a6dea92e983397202ddfd1465d7e2d527", null ],
+      [ "SERVER_OPPONENT_QUIT", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7a919a9825c877603dfaecae0dce5bfba2", null ],
+      [ "MAX_NUMBER_OF_MSGS", "read__write__msg__ext_8h.html#a26b86e6fe63d5c00ba548183812fdbe7aa22a171af39942485467fd1290d4c97d", null ]
+    ] ],
+    [ "get_msg_string", "read__write__msg__ext_8h.html#ab1b6ca1d07f8dedd4d8a2511197bc785", null ],
+    [ "message_read", "read__write__msg__ext_8h.html#ad8a07cfdb9c6c81d816010499c5f6a42", null ],
+    [ "message_write", "read__write__msg__ext_8h.html#a673a795cf54018b983246b2c82a63030", null ]
+];

@@ -1,7 +1,8 @@
 var annotated_dup =
 [
-    [ "factori_args_s", "structfactori__args__s.html", "structfactori__args__s" ],
+    [ "client_command_line_parms_s", "structclient__command__line__parms__s.html", "structclient__command__line__parms__s" ],
+    [ "client_handler_params_s", "structclient__handler__params__s.html", "structclient__handler__params__s" ],
     [ "lock_s", "structlock__s.html", "structlock__s" ],
-    [ "queue_elem_s", "structqueue__elem__s.html", "structqueue__elem__s" ],
-    [ "queue_s", "structqueue__s.html", "structqueue__s" ]
+    [ "msg_parameters_s", "structmsg__parameters__s.html", "structmsg__parameters__s" ],
+    [ "server_command_line_parms_s", "structserver__command__line__parms__s.html", "structserver__command__line__parms__s" ]
 ];

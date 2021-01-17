@@ -113,37 +113,34 @@ $(document).ready(function(){initNavTree('trace_8c_source.html',''); initResizab
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*----------------------------------------------------------------</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">EXTERNAL FUNCTIONS</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">----------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;DWORD <a class="code" href="trace_8h.html#a8bf911e9307d28081f5f079f2d3957cb">get_indent</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;DWORD get_indent(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> g_num_of_tabs;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="trace_8h.html#a3d032fffc0cbf1bdb1193e69d4fad62c">increase_indent</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> increase_indent(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    g_num_of_tabs++;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="trace_8h.html#a772f62c49f0fe8022ebdd931f2612742">decrease_indent</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> decrease_indent(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    g_num_of_tabs--;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*----------------------------------------------------------------</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">PRIVATE FUNCTIONS</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/* PRIVATE FUNCTIONS                                              */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/*----------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*DEBUG_PRINT_ON*/</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="atrace_8h_html"><div class="ttname"><a href="trace_8h.html">trace.h</a></div><div class="ttdoc">All common hardcoded data, types, and constants.</div></div>
-<div class="ttc" id="atrace_8h_html_a3d032fffc0cbf1bdb1193e69d4fad62c"><div class="ttname"><a href="trace_8h.html#a3d032fffc0cbf1bdb1193e69d4fad62c">increase_indent</a></div><div class="ttdeci">void increase_indent(void)</div><div class="ttdoc">increase indent global variable</div></div>
-<div class="ttc" id="atrace_8h_html_a8bf911e9307d28081f5f079f2d3957cb"><div class="ttname"><a href="trace_8h.html#a8bf911e9307d28081f5f079f2d3957cb">get_indent</a></div><div class="ttdeci">DWORD get_indent(void)</div><div class="ttdoc">Get the indent object.</div></div>
-<div class="ttc" id="atrace_8h_html_a772f62c49f0fe8022ebdd931f2612742"><div class="ttname"><a href="trace_8h.html#a772f62c49f0fe8022ebdd931f2612742">decrease_indent</a></div><div class="ttdeci">void decrease_indent(void)</div><div class="ttdoc">decrease indent global variable</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_16e9a5b3a460535635efdb713ea543e2.html">Ex4</a></li><li class="navelem"><a class="el" href="dir_54ea1f843d8ef45f796e549563d9fba1.html">Share</a></li><li class="navelem"><a class="el" href="dir_31c417a8884d34356bbc5524d37b3ec9.html">src</a></li><li class="navelem"><a class="el" href="dir_a5b51037b651d97e7830f260845572b5.html">trace</a></li><li class="navelem"><a class="el" href="trace_8c.html">trace.c</a></li>
-    <li class="footer">Generated on Thu Dec 24 2020 11:22:40 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Sun Jan 17 2021 13:12:36 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

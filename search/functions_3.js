@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['get_5findent_193',['get_indent',['../trace_8h.html#a8bf911e9307d28081f5f079f2d3957cb',1,'trace.h']]],
-  ['get_5fint_5ffrom_5fstring_194',['get_int_from_string',['../command__line__parsing_8c.html#ad785d9d76730f07ca1ce0f5797ca178d',1,'get_int_from_string(const char *p_string):&#160;command_line_parsing.c'],['../command__line__parsing_8h.html#ad785d9d76730f07ca1ce0f5797ca178d',1,'get_int_from_string(const char *p_string):&#160;command_line_parsing.h']]]
+  ['exit_5fthread_362',['exit_thread',['../server_8c.html#a7ee40d5a758384d6f352f41b7fe91331',1,'exit_thread(void *unused_param):&#160;server.c'],['../server_8h.html#a7ee40d5a758384d6f352f41b7fe91331',1,'exit_thread(void *unused_param):&#160;server.h']]]
 ];

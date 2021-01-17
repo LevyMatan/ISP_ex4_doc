@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['main_202',['main',['../server_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;server.c'],['../client_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;client.c']]]
+  ['increase_5fconnected_5fplayers_5fby_5fone_378',['increase_connected_players_by_one',['../server_8c.html#a0f228419390babfdc78e5cf088cd5bc9',1,'increase_connected_players_by_one(lock_t *p_lock):&#160;server.c'],['../server_8h.html#a0f228419390babfdc78e5cf088cd5bc9',1,'increase_connected_players_by_one(lock_t *p_lock):&#160;server.h']]],
+  ['is_5ffile_5fexists_379',['is_file_exists',['../inter__thread__communication_8c.html#a23af579c94672cc80ca966857bc373e9',1,'is_file_exists(lock_t *p_read_lock):&#160;inter_thread_communication.c'],['../inter__thread__communication_8h.html#a23af579c94672cc80ca966857bc373e9',1,'is_file_exists(lock_t *p_read_lock):&#160;inter_thread_communication.c']]],
+  ['is_5ffour_5fdigits_380',['is_four_digits',['../client_8c.html#aadea52a49157a5db6287b7007d70e224',1,'is_four_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.c'],['../client_8h.html#aadea52a49157a5db6287b7007d70e224',1,'is_four_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.h']]],
+  ['is_5funique_5fdigits_381',['is_unique_digits',['../client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4',1,'is_unique_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.c'],['../client_8h.html#a16541171cbbfbd0ba9d1dc2b1afad0d4',1,'is_unique_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.h']]]
 ];

@@ -1,13 +1,15 @@
 var searchData=
 [
-  ['magenta_5f_5fconsole_5fcolor_5fcode_99',['MAGENTA__CONSOLE_COLOR_CODE',['../trace_8h.html#ab57461fba1d7143b5d2e09c5dd277e6b',1,'trace.h']]],
-  ['main_100',['main',['../server_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;server.c'],['../client_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;client.c']]],
-  ['max_5fallowed_5fargs_101',['MAX_ALLOWED_ARGS',['../command__line__parsing_8h.html#a5ae504ce81a8e1ee0ca5098042613cf9',1,'command_line_parsing.h']]],
-  ['max_5flog_5ffunction_5fline_102',['MAX_LOG_FUNCTION_LINE',['../trace_8h.html#a3550c5f27101577a40a6667b145fdca3',1,'trace.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fin_5fa_5fline_103',['MAX_NUMBER_OF_CHARECTERS_IN_A_LINE',['../file__utils_8h.html#a41be1999e7d61e63a2f1a22538dd08cd',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fin_5fpriority_5ffile_5fline_104',['MAX_NUMBER_OF_CHARECTERS_IN_PRIORITY_FILE_LINE',['../file__utils_8h.html#ae2cea122fa8c16ca3ea0a73bd930d984',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fcharecters_5fof_5ftask_105',['MAX_NUMBER_OF_CHARECTERS_OF_TASK',['../file__utils_8h.html#aef0eee09a3759dcadf2bd6c0eb9f6ade',1,'file_utils.h']]],
-  ['max_5fnumber_5fof_5fdigits_106',['MAX_NUMBER_OF_DIGITS',['../file__utils__ext_8h.html#a9b118d96de984eb21f418e288622ecde',1,'file_utils_ext.h']]],
-  ['max_5fthread_5fnum_107',['MAX_THREAD_NUM',['../command__line__parsing_8h.html#a7370ddc11d266a9c68a40d91bf05927e',1,'command_line_parsing.h']]],
-  ['min_5fallowed_5fargs_108',['MIN_ALLOWED_ARGS',['../command__line__parsing_8h.html#aa9d07ba7cb4d165a8df1743bb47ba2f1',1,'command_line_parsing.h']]]
+  ['increase_5fconnected_5fplayers_5fby_5fone_158',['increase_connected_players_by_one',['../server_8c.html#a0f228419390babfdc78e5cf088cd5bc9',1,'increase_connected_players_by_one(lock_t *p_lock):&#160;server.c'],['../server_8h.html#a0f228419390babfdc78e5cf088cd5bc9',1,'increase_connected_players_by_one(lock_t *p_lock):&#160;server.h']]],
+  ['inter_5fthread_5fcommunication_2ec_159',['inter_thread_communication.c',['../inter__thread__communication_8c.html',1,'']]],
+  ['inter_5fthread_5fcommunication_2eh_160',['inter_thread_communication.h',['../inter__thread__communication_8h.html',1,'']]],
+  ['inter_5fthread_5fcommunication_5ffile_5fname_5fstring_161',['INTER_THREAD_COMMUNICATION_FILE_NAME_STRING',['../inter__thread__communication_8h.html#aa66af78edef7e08cbc3050602bee22e6',1,'inter_thread_communication.h']]],
+  ['invalid_5finteger_5fvalue_162',['INVALID_INTEGER_VALUE',['../common__types_8h.html#aef4b50ccd470e2aa9f71340e3248b5cd',1,'common_types.h']]],
+  ['invalid_5fplayer_5fe_163',['INVALID_PLAYER_E',['../inter__thread__communication_8h.html#a439539748a3993357fe9a31fe8cf48bfaf54d10c070e0072cb438cee9d5768fa0',1,'inter_thread_communication.h']]],
+  ['ip_5faddress_5farg_5findex_164',['IP_ADDRESS_ARG_INDEX',['../client_2command__line__parsing_8h.html#ad3d39d865ee1d3217ac0c43562be3bf4',1,'command_line_parsing.h']]],
+  ['ip_5fmax_5flegnth_5fstring_165',['IP_MAX_LEGNTH_STRING',['../client_2command__line__parsing_8h.html#aa391dd64081b46cbc9183c7e6b938532',1,'command_line_parsing.h']]],
+  ['ip_5fstring_166',['ip_string',['../structclient__command__line__parms__s.html#ad4cfee924c49e9da51a43576415ad8d1',1,'client_command_line_parms_s']]],
+  ['is_5ffile_5fexists_167',['is_file_exists',['../inter__thread__communication_8c.html#a23af579c94672cc80ca966857bc373e9',1,'is_file_exists(lock_t *p_read_lock):&#160;inter_thread_communication.c'],['../inter__thread__communication_8h.html#a23af579c94672cc80ca966857bc373e9',1,'is_file_exists(lock_t *p_read_lock):&#160;inter_thread_communication.c']]],
+  ['is_5ffour_5fdigits_168',['is_four_digits',['../client_8c.html#aadea52a49157a5db6287b7007d70e224',1,'is_four_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.c'],['../client_8h.html#aadea52a49157a5db6287b7007d70e224',1,'is_four_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.h']]],
+  ['is_5funique_5fdigits_169',['is_unique_digits',['../client_8c.html#a16541171cbbfbd0ba9d1dc2b1afad0d4',1,'is_unique_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.c'],['../client_8h.html#a16541171cbbfbd0ba9d1dc2b1afad0d4',1,'is_unique_digits(char digits_array[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]):&#160;client.h']]]
 ];

@@ -1,5 +1,19 @@
 var searchData=
 [
-  ['increase_5findent_86',['increase_indent',['../trace_8h.html#a3d032fffc0cbf1bdb1193e69d4fad62c',1,'increase_indent(void):&#160;trace.h'],['../trace_8h.html#a25941561955f7b0c249c31ba18dbef5e',1,'INCREASE_INDENT():&#160;trace.h']]],
-  ['invalid_5finteger_5fvalue_87',['INVALID_INTEGER_VALUE',['../common__types_8h.html#aef4b50ccd470e2aa9f71340e3248b5cd',1,'common_types.h']]]
+  ['fail_5fmenu_5fquit_120',['FAIL_MENU_QUIT',['../client_8h.html#af75be8107911ddf46c7db5b10f3889b5',1,'client.h']]],
+  ['fail_5fmenu_5fretry_121',['FAIL_MENU_RETRY',['../client_8h.html#a22a4665115d3ecea1d9b342307db0c76',1,'client.h']]],
+  ['fifteen_5fseconds_5fin_5fmilliseconds_122',['FIFTEEN_SECONDS_IN_MILLISECONDS',['../common__types_8h.html#a0459fc04edd070b05243b1aea4d9a325',1,'common_types.h']]],
+  ['file_5futils_2ec_123',['file_utils.c',['../file__utils_8c.html',1,'']]],
+  ['file_5futils_2eh_124',['file_utils.h',['../file__utils_8h.html',1,'']]],
+  ['file_5futils_5fcreate_5ffile_5ffor_5fshared_5fread_5fand_5fwrite_125',['FILE_UTILS_create_file_for_shared_read_and_write',['../file__utils__ext_8h.html#ad4637d1602e581b018988f78767d5f5f',1,'FILE_UTILS_create_file_for_shared_read_and_write(HANDLE *p_file_handle, char *p_input_file_name):&#160;file_utils.c'],['../file__utils_8c.html#ad4637d1602e581b018988f78767d5f5f',1,'FILE_UTILS_create_file_for_shared_read_and_write(HANDLE *p_file_handle, char *p_input_file_name):&#160;file_utils.c']]],
+  ['file_5futils_5fext_2eh_126',['file_utils_ext.h',['../file__utils__ext_8h.html',1,'']]],
+  ['file_5futils_5fg_5fwrite_5fposition_127',['FILE_UTILS_g_write_position',['../file__utils_8c.html#a9186df3cb4b668ab0d0a5da3fc125599',1,'file_utils.c']]],
+  ['file_5futils_5fread_5fone_5fline_5ffrom_5ffile_128',['FILE_UTILS_read_one_line_from_file',['../file__utils__ext_8h.html#ac483ad62d3ca895678cffe3a53744f32',1,'FILE_UTILS_read_one_line_from_file(HANDLE file_handle, DWORD *p_bytes_read_in_line, DWORD *p_number):&#160;file_utils.c'],['../file__utils_8c.html#ac483ad62d3ca895678cffe3a53744f32',1,'FILE_UTILS_read_one_line_from_file(HANDLE file_handle, DWORD *p_bytes_read_in_line, DWORD *p_number):&#160;file_utils.c']]],
+  ['file_5futils_5fset_5fwrite_5fposition_129',['FILE_UTILS_set_write_position',['../file__utils__ext_8h.html#aa7d90eddf0161c6ee6b16f7cf59d6525',1,'FILE_UTILS_set_write_position(const DWORD position):&#160;file_utils.c'],['../file__utils_8c.html#aa7d90eddf0161c6ee6b16f7cf59d6525',1,'FILE_UTILS_set_write_position(const DWORD position):&#160;file_utils.c']]],
+  ['file_5futils_5fwrite_5fbuffer_5fto_5ffile_130',['FILE_UTILS_write_buffer_to_file',['../file__utils__ext_8h.html#a6ba806c9791793d2e17d9c65745589ad',1,'FILE_UTILS_write_buffer_to_file(HANDLE p_file_handle, const char buffer_to_write[], const DWORD num_of_bytes):&#160;file_utils.c'],['../file__utils_8c.html#a6ba806c9791793d2e17d9c65745589ad',1,'FILE_UTILS_write_buffer_to_file(HANDLE p_file_handle, const char buffer_to_write[], const DWORD num_of_bytes):&#160;file_utils.c']]],
+  ['find_5ffirst_5funused_5fthread_5fslot_131',['find_first_unused_thread_slot',['../server_8c.html#af9cf1d99788c8075d8fe00b01472fae9',1,'find_first_unused_thread_slot(const HANDLE a_thread_handles[(3)]):&#160;server.c'],['../server_8h.html#af9cf1d99788c8075d8fe00b01472fae9',1,'find_first_unused_thread_slot(const HANDLE a_thread_handles[(3)]):&#160;server.h']]],
+  ['first_5for_5fsecond_5fto_5fplay_132',['first_or_second_to_play',['../inter__thread__communication_8c.html#af78da4d92cf5ea3999dc0cca4dc2fa7c',1,'first_or_second_to_play(lock_t *p_lock, const int file_position):&#160;inter_thread_communication.c'],['../inter__thread__communication_8h.html#af78da4d92cf5ea3999dc0cca4dc2fa7c',1,'first_or_second_to_play(lock_t *p_lock, const int file_position):&#160;inter_thread_communication.c']]],
+  ['first_5fplayer_5fe_133',['FIRST_PLAYER_E',['../inter__thread__communication_8h.html#a439539748a3993357fe9a31fe8cf48bfa269778a5d01bc63758b3eb99f49f04a8',1,'inter_thread_communication.h']]],
+  ['five_5fminutes_5fin_5fmilliseconds_134',['FIVE_MINUTES_IN_MILLISECONDS',['../common__types_8h.html#a1cbe46e7449a2faf865dbd9f942881ae',1,'common_types.h']]],
+  ['four_5fdigits_5fnumber_135',['four_digits_number',['../structmsg__parameters__s.html#a07da6fcacceeb7e6bedd59d1e9964870',1,'msg_parameters_s']]]
 ];

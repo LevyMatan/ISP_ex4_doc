@@ -93,6 +93,9 @@ $(document).ready(function(){initNavTree('client_8h.html',''); initResizable(); 
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">client.h File Reference</div>  </div>
 </div><!--header-->
@@ -103,19 +106,29 @@ $(document).ready(function(){initNavTree('client_8h.html',''); initResizable(); 
 <div class="textblock"><code>#include &lt;Windows.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="common__types_8h_source.html">common_types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client_2command__line__parsing_8h_source.html">command_line_parsing.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="trace_8h_source.html">trace.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="send__recv__messages__ext_8h_source.html">send_recv_messages_ext.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="read__write__msg__ext_8h_source.html">read_write_msg_ext.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for client.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="client_8h__incl.png" border="0" usemap="#aclient_8h" alt=""/></div>
-<map name="client_8h" id="client_8h">
-<area shape="rect" title="Delartion of private functions of queue module." alt="" coords="78,5,142,32"/>
-<area shape="rect" title=" " alt="" coords="41,155,128,181"/>
-<area shape="rect" title=" " alt="" coords="22,80,83,107"/>
-<area shape="rect" href="common__types_8h.html" title="All common hardcoded data, types, and constants." alt="" coords="107,80,230,107"/>
-<area shape="rect" href="trace_8h.html" title="All common hardcoded data, types, and constants." alt="" coords="255,80,317,107"/>
-<area shape="rect" title=" " alt="" coords="207,155,274,181"/>
-<area shape="rect" title=" " alt="" coords="299,155,364,181"/>
+<map name="client_8h" id="aclient_8h">
+<area shape="rect" title="Delartion of private functions of queue module." alt="" coords="317,5,381,32"/>
+<area shape="rect" title=" " alt="" coords="5,259,92,285"/>
+<area shape="rect" title=" " alt="" coords="206,177,267,203"/>
+<area shape="rect" href="common__types_8h.html" title="All common hardcoded data, types, and constants." alt="" coords="481,259,603,285"/>
+<area shape="rect" href="client_2command__line__parsing_8h.html" title=" " alt="" coords="265,87,432,114"/>
+<area shape="rect" href="trace_8h.html" title="All common hardcoded data, types, and constants." alt="" coords="119,177,181,203"/>
+<area shape="rect" href="send__recv__messages__ext_8h.html" title=" " alt="" coords="694,80,843,121"/>
+<area shape="rect" href="read__write__msg__ext_8h.html" title=" " alt="" coords="580,177,731,203"/>
+<area shape="rect" href="common__command__line__parsing__ext_8h.html" title=" " alt="" coords="342,169,505,211"/>
+<area shape="rect" title=" " alt="" coords="117,259,183,285"/>
+<area shape="rect" title=" " alt="" coords="208,259,273,285"/>
+<area shape="rect" title=" " alt="" coords="298,259,362,285"/>
+<area shape="rect" title=" " alt="" coords="806,177,894,203"/>
+<area shape="rect" title=" " alt="" coords="918,177,1003,203"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -129,6 +142,48 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 </div>
 <p><a href="client_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ac7bef5d85e3dcd73eef56ad39ffc84a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td></tr>
+<tr class="separator:ac7bef5d85e3dcd73eef56ad39ffc84a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a954ce12b5329a3d27c78972e9c147018"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a954ce12b5329a3d27c78972e9c147018">MAIN_MENU_PLAY_VERSUS</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="separator:a954ce12b5329a3d27c78972e9c147018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1098712ddf4ee1701ea37770928ea8c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a1098712ddf4ee1701ea37770928ea8c8">MAIN_MENU_QUIT</a>&#160;&#160;&#160;(2)</td></tr>
+<tr class="separator:a1098712ddf4ee1701ea37770928ea8c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a4665115d3ecea1d9b342307db0c76"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a22a4665115d3ecea1d9b342307db0c76">FAIL_MENU_RETRY</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="separator:a22a4665115d3ecea1d9b342307db0c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af75be8107911ddf46c7db5b10f3889b5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#af75be8107911ddf46c7db5b10f3889b5">FAIL_MENU_QUIT</a>&#160;&#160;&#160;(2)</td></tr>
+<tr class="separator:af75be8107911ddf46c7db5b10f3889b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae048b19573a9feee41ce56523d74e98d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ae048b19573a9feee41ce56523d74e98d">act_to_msg</a> (SOCKET *p_socket, <a class="el" href="read__write__msg__ext_8h.html#a203b4a4285ac455b652ed8f0a98b98f2">msg_parameters_t</a> input_msg_params)</td></tr>
+<tr class="memdesc:ae048b19573a9feee41ce56523d74e98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main client function - here all the magic happens. According to the message received from the server. The client application will react following the instructions and logic.  <a href="client_8h.html#ae048b19573a9feee41ce56523d74e98d">More...</a><br /></td></tr>
+<tr class="separator:ae048b19573a9feee41ce56523d74e98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa505845830a310b128a7e2d8fc351f"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a8fa505845830a310b128a7e2d8fc351f">client_options_when_failed_to_connect</a> ()</td></tr>
+<tr class="memdesc:a8fa505845830a310b128a7e2d8fc351f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display failed to connect menu. Exesostive polling on user input.  <a href="client_8h.html#a8fa505845830a310b128a7e2d8fc351f">More...</a><br /></td></tr>
+<tr class="separator:a8fa505845830a310b128a7e2d8fc351f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c1cdb7241c10555ae16c55d35a48df"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ac8c1cdb7241c10555ae16c55d35a48df">client_main_menu</a> ()</td></tr>
+<tr class="memdesc:ac8c1cdb7241c10555ae16c55d35a48df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display main menu to user and get its input.  <a href="client_8h.html#ac8c1cdb7241c10555ae16c55d35a48df">More...</a><br /></td></tr>
+<tr class="separator:ac8c1cdb7241c10555ae16c55d35a48df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca2188e9c9465c55f0b09ff5979a17f3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#aca2188e9c9465c55f0b09ff5979a17f3">get_four_unique_digits_from_user</a> (char user_4_digits[<a class="el" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</td></tr>
+<tr class="memdesc:aca2188e9c9465c55f0b09ff5979a17f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the four unique digits from user object.  <a href="client_8h.html#aca2188e9c9465c55f0b09ff5979a17f3">More...</a><br /></td></tr>
+<tr class="separator:aca2188e9c9465c55f0b09ff5979a17f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c288a5e6f6997e3b65899d3f60bb3bf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a7c288a5e6f6997e3b65899d3f60bb3bf">get_four_digits_from_user</a> (char user_4_digits[<a class="el" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</td></tr>
+<tr class="memdesc:a7c288a5e6f6997e3b65899d3f60bb3bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the four digits from user object.  <a href="client_8h.html#a7c288a5e6f6997e3b65899d3f60bb3bf">More...</a><br /></td></tr>
+<tr class="separator:a7c288a5e6f6997e3b65899d3f60bb3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadea52a49157a5db6287b7007d70e224"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#aadea52a49157a5db6287b7007d70e224">is_four_digits</a> (char digits_array[<a class="el" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</td></tr>
+<tr class="separator:aadea52a49157a5db6287b7007d70e224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16541171cbbfbd0ba9d1dc2b1afad0d4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a16541171cbbfbd0ba9d1dc2b1afad0d4">is_unique_digits</a> (char digits_array[<a class="el" href="common__types_8h.html#a819f893c4e38c5f3d73bca82a9a2ac51">MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS</a>])</td></tr>
+<tr class="separator:a16541171cbbfbd0ba9d1dc2b1afad0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af37e90d89a9958c256bbacae100b5d4c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#af37e90d89a9958c256bbacae100b5d4c">get_user_menu_input</a> ()</td></tr>
+<tr class="memdesc:af37e90d89a9958c256bbacae100b5d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the user menu input object Valid user input is solely the digit 1 or the digits 2. All other inputs will be rejected and user will be asked to enter hischoice again.  <a href="client_8h.html#af37e90d89a9958c256bbacae100b5d4c">More...</a><br /></td></tr>
+<tr class="separator:af37e90d89a9958c256bbacae100b5d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33954be5114778ebfdebf05166db1d66"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a33954be5114778ebfdebf05166db1d66">print_game_result</a> (const <a class="el" href="read__write__msg__ext_8h.html#a203b4a4285ac455b652ed8f0a98b98f2">msg_parameters_t</a> game_results_params)</td></tr>
+<tr class="memdesc:a33954be5114778ebfdebf05166db1d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints game results to user.  <a href="client_8h.html#a33954be5114778ebfdebf05166db1d66">More...</a><br /></td></tr>
+<tr class="separator:a33954be5114778ebfdebf05166db1d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Delartion of private functions of queue module. </p>
 <dl class="section author"><dt>Author</dt><dd>Matan Levy (<a href="#" onclick="location.href='mai'+'lto:'+'lev'+'ym'+'ata'+'nl'+'evy'+'@g'+'mai'+'l.'+'com'; return false;">levym<span style="display: none;">.nosp@m.</span>atan<span style="display: none;">.nosp@m.</span>levy@<span style="display: none;">.nosp@m.</span>gmai<span style="display: none;">.nosp@m.</span>l.com</a>) </dd></dl>
@@ -137,13 +192,395 @@ This graph shows which files directly or indirectly include this file:</div>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2020 </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="client_8h_source.html">client.h</a>.</p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="af75be8107911ddf46c7db5b10f3889b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75be8107911ddf46c7db5b10f3889b5">&#9670;&nbsp;</a></span>FAIL_MENU_QUIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FAIL_MENU_QUIT&#160;&#160;&#160;(2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00038">38</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<a id="a22a4665115d3ecea1d9b342307db0c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a4665115d3ecea1d9b342307db0c76">&#9670;&nbsp;</a></span>FAIL_MENU_RETRY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FAIL_MENU_RETRY&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00037">37</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<a id="a954ce12b5329a3d27c78972e9c147018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a954ce12b5329a3d27c78972e9c147018">&#9670;&nbsp;</a></span>MAIN_MENU_PLAY_VERSUS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAIN_MENU_PLAY_VERSUS&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00035">35</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<a id="a1098712ddf4ee1701ea37770928ea8c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1098712ddf4ee1701ea37770928ea8c8">&#9670;&nbsp;</a></span>MAIN_MENU_QUIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAIN_MENU_QUIT&#160;&#160;&#160;(2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00036">36</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<a id="ac7bef5d85e3dcd73eef56ad39ffc84a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7bef5d85e3dcd73eef56ad39ffc84a9">&#9670;&nbsp;</a></span>WIN32_LEAN_AND_MEAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WIN32_LEAN_AND_MEAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00018">18</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae048b19573a9feee41ce56523d74e98d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae048b19573a9feee41ce56523d74e98d">&#9670;&nbsp;</a></span>act_to_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> act_to_msg </td>
+          <td>(</td>
+          <td class="paramtype">SOCKET *&#160;</td>
+          <td class="paramname"><em>p_socket</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="read__write__msg__ext_8h.html#a203b4a4285ac455b652ed8f0a98b98f2">msg_parameters_t</a>&#160;</td>
+          <td class="paramname"><em>input_msg_params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Main client function - here all the magic happens. According to the message received from the server. The client application will react following the instructions and logic. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_socket</td><td></td></tr>
+    <tr><td class="paramname">input_msg_params</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>error_e </dd></dl>
+
+</div>
+</div>
+<a id="ac8c1cdb7241c10555ae16c55d35a48df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c1cdb7241c10555ae16c55d35a48df">&#9670;&nbsp;</a></span>client_main_menu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int client_main_menu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Display main menu to user and get its input. </p>
+<dl class="section return"><dt>Returns</dt><dd>int user input, can be only 1 or 2 </dd></dl>
+
+</div>
+</div>
+<a id="a8fa505845830a310b128a7e2d8fc351f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa505845830a310b128a7e2d8fc351f">&#9670;&nbsp;</a></span>client_options_when_failed_to_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int client_options_when_failed_to_connect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Display failed to connect menu. Exesostive polling on user input. </p>
+<dl class="section return"><dt>Returns</dt><dd>int user input, can be only 1 or 2 </dd></dl>
+
+</div>
+</div>
+<a id="a7c288a5e6f6997e3b65899d3f60bb3bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c288a5e6f6997e3b65899d3f60bb3bf">&#9670;&nbsp;</a></span>get_four_digits_from_user()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> get_four_digits_from_user </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>user_4_digits</em>[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the four digits from user object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_4_digits</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>error_e </dd></dl>
+
+</div>
+</div>
+<a id="aca2188e9c9465c55f0b09ff5979a17f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2188e9c9465c55f0b09ff5979a17f3">&#9670;&nbsp;</a></span>get_four_unique_digits_from_user()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="common__types_8h.html#a09c25ad25f326a930ae42ace60b70232">error_e</a> get_four_unique_digits_from_user </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>user_4_digits</em>[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the four unique digits from user object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_4_digits</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>error_e </dd></dl>
+
+</div>
+</div>
+<a id="af37e90d89a9958c256bbacae100b5d4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af37e90d89a9958c256bbacae100b5d4c">&#9670;&nbsp;</a></span>get_user_menu_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int get_user_menu_input </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the user menu input object Valid user input is solely the digit 1 or the digits 2. All other inputs will be rejected and user will be asked to enter hischoice again. </p>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="aadea52a49157a5db6287b7007d70e224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadea52a49157a5db6287b7007d70e224">&#9670;&nbsp;</a></span>is_four_digits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int is_four_digits </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>digits_array</em>[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">digits_array</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a16541171cbbfbd0ba9d1dc2b1afad0d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16541171cbbfbd0ba9d1dc2b1afad0d4">&#9670;&nbsp;</a></span>is_unique_digits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int is_unique_digits </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>digits_array</em>[MAX_NUMBER_OF_DIGITS_IN_PLAYER_GUESS]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">digits_array</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a33954be5114778ebfdebf05166db1d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33954be5114778ebfdebf05166db1d66">&#9670;&nbsp;</a></span>print_game_result()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void print_game_result </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="read__write__msg__ext_8h.html#a203b4a4285ac455b652ed8f0a98b98f2">msg_parameters_t</a>&#160;</td>
+          <td class="paramname"><em>game_results_params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints game results to user. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game_results_params</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_16e9a5b3a460535635efdb713ea543e2.html">Ex4</a></li><li class="navelem"><a class="el" href="dir_040113c39c720640d74772a947819e56.html">client</a></li><li class="navelem"><a class="el" href="client_8h.html">client.h</a></li>
-    <li class="footer">Generated on Thu Dec 24 2020 11:22:40 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Sun Jan 17 2021 13:12:36 for EX4 by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>
